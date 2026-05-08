@@ -1,0 +1,2214 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Afsal Ahamed | Senior Software Engineer</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin=""
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            html {
+                scroll-behavior: smooth;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                background-color: #000;
+                color: #dedbc8;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                overflow-x: hidden;
+                font-family: "DM Sans", sans-serif;
+            }
+            .font-display {
+                font-family: "Playfair Display", serif;
+            }
+            .noise-overlay {
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            }
+            .bg-noise {
+                background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            }
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #000;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #1e1e1e;
+                border-radius: 4px;
+            }
+
+            /* ── TECH CARDS ── */
+            .tech-grid {
+                display: grid;
+                gap: 10px;
+                grid-template-columns: 1fr;
+            }
+            @media (min-width: 640px) {
+                .tech-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (min-width: 1100px) {
+                .tech-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+            .tc {
+                border-radius: 18px;
+                padding: 28px 28px 24px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                min-height: 300px;
+                position: relative;
+                overflow: hidden;
+                transition: transform 0.3s ease;
+            }
+            .tc:hover {
+                transform: translateY(-2px);
+            }
+            .tc-dark {
+                background: #101010;
+                border: 1px solid rgba(222, 219, 200, 0.07);
+            }
+            .tc-orange {
+                background: #bf4e38;
+                border: none;
+            }
+            .tc-cream {
+                background: #dedbc8;
+                border: none;
+            }
+            .tc-charcoal {
+                background: #181818;
+                border: 1px solid rgba(222, 219, 200, 0.09);
+            }
+            .tc-num {
+                position: absolute;
+                top: 18px;
+                right: 22px;
+                font-family: "DM Sans", sans-serif;
+                font-size: 11px;
+                font-weight: 300;
+                letter-spacing: 0.15em;
+                opacity: 0.55;
+            }
+            .tc-dark .tc-num,
+            .tc-charcoal .tc-num {
+                color: #dedbc8;
+            }
+            .tc-orange .tc-num {
+                color: #fff;
+            }
+            .tc-cream .tc-num {
+                color: #111;
+            }
+            .tc-label {
+                font-family: "Cormorant Garamond", serif;
+                font-size: 26px;
+                font-weight: 600;
+                letter-spacing: 0.01em;
+                line-height: 1.1;
+            }
+            .tc-dark .tc-label,
+            .tc-charcoal .tc-label {
+                color: #dedbc8;
+            }
+            .tc-orange .tc-label {
+                color: #fff;
+            }
+            .tc-cream .tc-label {
+                color: #111;
+            }
+            .tc-desc {
+                font-family: "DM Sans", sans-serif;
+                font-size: 12px;
+                font-weight: 300;
+                line-height: 1.85;
+                letter-spacing: 0.025em;
+            }
+            .tc-dark .tc-desc,
+            .tc-charcoal .tc-desc {
+                color: rgba(222, 219, 200, 0.55);
+            }
+            .tc-orange .tc-desc {
+                color: rgba(255, 255, 255, 0.82);
+            }
+            .tc-cream .tc-desc {
+                color: rgba(17, 17, 17, 0.65);
+            }
+            .tc-tag {
+                display: inline-flex;
+                align-items: center;
+                padding: 5px 14px;
+                border-radius: 999px;
+                font-family: "DM Sans", sans-serif;
+                font-size: 10px;
+                font-weight: 300;
+                letter-spacing: 0.07em;
+                width: fit-content;
+                cursor: default;
+            }
+            .tag-outline-light {
+                background: transparent;
+                color: rgba(222, 219, 200, 0.65);
+                border: 1px solid rgba(222, 219, 200, 0.28);
+            }
+            .tag-filled-light {
+                background: #dedbc8;
+                color: #111;
+                border: none;
+            }
+            .tag-filled-black {
+                background: #111;
+                color: rgba(222, 219, 200, 0.75);
+                border: none;
+            }
+            .tag-outline-white {
+                background: transparent;
+                color: rgba(255, 255, 255, 0.85);
+                border: 1px solid rgba(255, 255, 255, 0.45);
+            }
+            .tag-outline-dark {
+                background: transparent;
+                color: rgba(17, 17, 17, 0.65);
+                border: 1px solid rgba(17, 17, 17, 0.32);
+            }
+
+            /* ── EXPERIENCE ── */
+            .exp-row {
+                display: grid;
+                grid-template-columns: 52px 1fr 160px;
+                gap: 28px;
+                padding: 36px 0;
+                border-top: 1px solid rgba(222, 219, 200, 0.08);
+                cursor: default;
+            }
+            .exp-row:last-child {
+                border-bottom: 1px solid rgba(222, 219, 200, 0.08);
+            }
+            @media (max-width: 639px) {
+                .exp-row {
+                    grid-template-columns: 40px 1fr;
+                }
+                .exp-period-col {
+                    display: none;
+                }
+            }
+            .exp-num-col {
+                font-family: "DM Sans", sans-serif;
+                font-size: 12px;
+                font-weight: 400;
+                color: rgba(222, 219, 200, 0.6);
+                letter-spacing: 0.1em;
+                padding-top: 10px;
+            }
+            .exp-company {
+                font-family: "Playfair Display", serif;
+                font-weight: 700;
+                font-size: clamp(30px, 4.2vw, 58px);
+                color: #dedbc8;
+                letter-spacing: -0.025em;
+                line-height: 1;
+                transition: opacity 0.25s;
+            }
+            .exp-row:hover .exp-company {
+                opacity: 0.7;
+            }
+            .exp-role {
+                font-family: "Cormorant Garamond", serif;
+                font-size: 16px;
+                font-style: italic;
+                color: rgba(222, 219, 200, 0.55);
+                font-weight: 300;
+                margin-top: 6px;
+            }
+            .exp-desc-text {
+                font-family: "DM Sans", sans-serif;
+                font-size: 12px;
+                font-weight: 300;
+                color: rgba(222, 219, 200, 0.45);
+                line-height: 1.8;
+                margin-top: 14px;
+                max-width: 520px;
+            }
+            .exp-divider {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-top: 18px;
+                font-family: "DM Sans", sans-serif;
+                font-size: 9px;
+                font-weight: 300;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: rgba(222, 219, 200, 0.28);
+            }
+            .exp-divider::after {
+                content: "";
+                display: block;
+                height: 1px;
+                width: 36px;
+                background: rgba(222, 219, 200, 0.18);
+            }
+            .exp-period-col {
+                font-family: "DM Sans", sans-serif;
+                font-size: 11px;
+                font-weight: 300;
+                color: rgba(222, 219, 200, 0.6);
+                letter-spacing: 0.08em;
+                text-align: right;
+                padding-top: 10px;
+                white-space: nowrap;
+            }
+
+            /* ── SECTION HEADING ── */
+            .sh {
+                font-family: "Playfair Display", serif;
+                font-weight: 400;
+                letter-spacing: -0.03em;
+                line-height: 0.92;
+                color: #dedbc8;
+            }
+            .sh em {
+                font-style: italic;
+                color: rgba(222, 219, 200, 0.42);
+            }
+
+            /* ══════════════════════════════════════════
+               FLOATING ICON NAVBAR  — CREAM THEME
+            ══════════════════════════════════════════ */
+            .floating-nav {
+                position: fixed;
+                bottom: 36px;
+                left: 50%;
+                transform: translateX(-50%) translateY(24px);
+                display: flex;
+                align-items: center;
+                gap: 2px;
+                /* ✦ Cream background matching the LinkedIn pill in Image 2 */
+                background: #dedbc8;
+                border: 1px solid rgba(17, 17, 17, 0.12);
+                border-radius: 22px;
+                padding: 7px 9px;
+                z-index: 999;
+                backdrop-filter: blur(24px);
+                -webkit-backdrop-filter: blur(24px);
+                box-shadow:
+                    0 24px 64px rgba(0, 0, 0, 0.55),
+                    0 1px 0 rgba(255, 255, 255, 0.45) inset,
+                    0 -1px 0 rgba(0, 0, 0, 0.08) inset;
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity 0.45s ease,
+                    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+            .floating-nav.visible {
+                opacity: 1;
+                pointer-events: all;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            /* Separator — dark on cream */
+            .nav-sep {
+                width: 1px;
+                height: 20px;
+                background: rgba(17, 17, 17, 0.15);
+                flex-shrink: 0;
+                margin: 0 3px;
+            }
+
+            /* Wrapper — gold ring lives here */
+            .nav-item {
+                position: relative;
+                border-radius: 13px;
+                padding: 1.5px;
+                cursor: pointer;
+                background: transparent;
+                transition: background 0.35s ease;
+            }
+
+            /* Gold gradient ring when active */
+            .nav-item.active {
+                background: linear-gradient(
+                    150deg,
+                    #8a5200 0%,
+                    #d4920a 18%,
+                    #f5d060 38%,
+                    #fae388 50%,
+                    #e8b030 68%,
+                    #b07010 85%,
+                    #d4920a 100%
+                );
+                box-shadow:
+                    0 0 20px rgba(220, 170, 50, 0.45),
+                    0 0 8px rgba(245, 210, 80, 0.3);
+                animation: goldShimmer 3s ease-in-out infinite;
+                background-size: 200% 200%;
+            }
+
+            @keyframes goldShimmer {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+
+            /* Inner button */
+            .nav-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 46px;
+                height: 46px;
+                border-radius: 11.5px;
+                border: none;
+                cursor: pointer;
+                /* Active → dark pill so icon pops against gold ring */
+                background: #1c1c1c;
+                transition: background 0.25s ease;
+                position: relative;
+            }
+            /* Inactive → transparent so cream bg shows through */
+            .nav-item:not(.active) .nav-btn {
+                background: transparent;
+            }
+            .nav-item:not(.active):hover .nav-btn {
+                background: rgba(17, 17, 17, 0.08);
+            }
+
+            /* Icon — dark on cream for inactive, cream on dark for active */
+            .nav-btn svg {
+                transition:
+                    opacity 0.25s ease,
+                    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            }
+            /* Inactive: dark icons (visible on cream bg) */
+            .nav-item:not(.active) .nav-btn svg path,
+            .nav-item:not(.active) .nav-btn svg circle,
+            .nav-item:not(.active) .nav-btn svg rect {
+                stroke: #111 !important;
+                opacity: 0.45;
+            }
+            .nav-item:not(.active):hover .nav-btn svg path,
+            .nav-item:not(.active):hover .nav-btn svg circle,
+            .nav-item:not(.active):hover .nav-btn svg rect {
+                opacity: 0.8;
+            }
+            /* Active: keep cream icons (they sit on the dark inner pill) */
+            .nav-item.active .nav-btn svg path,
+            .nav-item.active .nav-btn svg circle,
+            .nav-item.active .nav-btn svg rect {
+                stroke: #dedbc8 !important;
+                opacity: 1;
+            }
+            .nav-item:not(.active):hover .nav-btn svg {
+                transform: translateY(-1.5px);
+            }
+
+            /* Active glow dot */
+            .nav-dot {
+                position: absolute;
+                bottom: -8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 3px;
+                height: 3px;
+                border-radius: 50%;
+                background: #c49a10;
+                box-shadow: 0 0 6px rgba(196, 154, 16, 0.9);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .nav-item.active .nav-dot {
+                opacity: 1;
+            }
+
+            /* Tooltip */
+            .nav-tip {
+                position: absolute;
+                bottom: calc(100% + 14px);
+                left: 50%;
+                transform: translateX(-50%) translateY(6px);
+                background: #1a1a1a;
+                border: 1px solid rgba(222, 219, 200, 0.12);
+                border-radius: 8px;
+                padding: 5px 11px;
+                font-family: "DM Sans", sans-serif;
+                font-size: 10px;
+                font-weight: 300;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: rgba(222, 219, 200, 0.75);
+                white-space: nowrap;
+                pointer-events: none;
+                opacity: 0;
+                transition:
+                    opacity 0.2s ease,
+                    transform 0.2s ease;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            }
+            .nav-tip::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                border: 4px solid transparent;
+                border-top-color: rgba(222, 219, 200, 0.12);
+            }
+            .nav-item:hover .nav-tip {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            /* ── SCROLL TO TOP PILL ── */
+            .scroll-top-btn {
+                position: fixed;
+                bottom: 36px;
+                right: 32px;
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                background: #dedbc8;
+                border-radius: 999px;
+                padding: 5px 5px 5px 20px;
+                cursor: pointer;
+                z-index: 999;
+                border: none;
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(10px);
+                transition:
+                    opacity 0.4s ease,
+                    transform 0.4s ease,
+                    padding-left 0.25s ease;
+                box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+            }
+            .scroll-top-btn.visible {
+                opacity: 1;
+                pointer-events: all;
+                transform: translateY(0);
+            }
+            .scroll-top-btn:hover {
+                padding-left: 24px;
+            }
+            .scroll-top-btn span {
+                font-family: "DM Sans", sans-serif;
+                font-size: 13px;
+                font-weight: 400;
+                color: #111;
+                letter-spacing: 0.02em;
+            }
+            .scroll-top-btn .arr-c {
+                width: 38px;
+                height: 38px;
+                border-radius: 999px;
+                background: #111;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+        </style>
+        <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <!-- ══ FLOATING ICON NAVBAR ══ -->
+        <nav class="floating-nav" id="floatingNav">
+            <div
+                class="nav-item active"
+                data-target="about"
+                onclick="navTo('about')"
+            >
+                <div class="nav-dot"></div>
+                <div class="nav-tip">About</div>
+                <button class="nav-btn" aria-label="About">
+                    <svg width="19" height="19" viewBox="0 0 20 20" fill="none">
+                        <circle
+                            cx="10"
+                            cy="6.5"
+                            r="3"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                            stroke-linecap="round"
+                        />
+                        <path
+                            d="M3 18c0-3.866 3.134-7 7-7s7 3.134 7 7"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                            stroke-linecap="round"
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-sep"></div>
+            <div
+                class="nav-item"
+                data-target="experience"
+                onclick="navTo('experience')"
+            >
+                <div class="nav-dot"></div>
+                <div class="nav-tip">Experience</div>
+                <button class="nav-btn" aria-label="Experience">
+                    <svg width="19" height="19" viewBox="0 0 20 20" fill="none">
+                        <rect
+                            x="2"
+                            y="10.5"
+                            width="3.5"
+                            height="7"
+                            rx="1"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                        />
+                        <rect
+                            x="8.2"
+                            y="6.5"
+                            width="3.5"
+                            height="11"
+                            rx="1"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                        />
+                        <rect
+                            x="14.5"
+                            y="2.5"
+                            width="3.5"
+                            height="15"
+                            rx="1"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-sep"></div>
+            <div
+                class="nav-item"
+                data-target="projects"
+                onclick="navTo('projects')"
+            >
+                <div class="nav-dot"></div>
+                <div class="nav-tip">Projects</div>
+                <button class="nav-btn" aria-label="Projects">
+                    <svg width="19" height="19" viewBox="0 0 20 20" fill="none">
+                        <rect
+                            x="2"
+                            y="2"
+                            width="7"
+                            height="7"
+                            rx="1.5"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                        />
+                        <rect
+                            x="11"
+                            y="2"
+                            width="7"
+                            height="7"
+                            rx="1.5"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                        />
+                        <rect
+                            x="2"
+                            y="11"
+                            width="7"
+                            height="7"
+                            rx="1.5"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                        />
+                        <rect
+                            x="11"
+                            y="11"
+                            width="7"
+                            height="7"
+                            rx="1.5"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-sep"></div>
+            <div
+                class="nav-item"
+                data-target="tech-stack"
+                onclick="navTo('tech-stack')"
+            >
+                <div class="nav-dot"></div>
+                <div class="nav-tip">Tech Stack</div>
+                <button class="nav-btn" aria-label="Tech Stack">
+                    <svg width="19" height="19" viewBox="0 0 20 20" fill="none">
+                        <path
+                            d="M2 13.5l8 3.5 8-3.5"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M2 9.5l8 3.5 8-3.5"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="M2 5.5l8-3 8 3-8 3-8-3z"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div class="nav-sep"></div>
+            <div
+                class="nav-item"
+                data-target="contact"
+                onclick="navTo('contact')"
+            >
+                <div class="nav-dot"></div>
+                <div class="nav-tip">Contact</div>
+                <button class="nav-btn" aria-label="Contact">
+                    <svg width="19" height="19" viewBox="0 0 20 20" fill="none">
+                        <rect
+                            x="2"
+                            y="4.5"
+                            width="16"
+                            height="11"
+                            rx="2"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                        />
+                        <path
+                            d="M2 7.5l8 5 8-5"
+                            stroke="#dedbc8"
+                            stroke-width="1.45"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- ══ SCROLL-TO-TOP PILL ══ -->
+        <button
+            class="scroll-top-btn"
+            id="scrollTopBtn"
+            onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+        >
+            <span>Top</span>
+            <div class="arr-c">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path
+                        d="M7 11V3M3.5 6.5L7 3l3.5 3.5"
+                        stroke="#dedbc8"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
+                </svg>
+            </div>
+        </button>
+
+        <script>
+            /* ── nav click scroll ── */
+            function navTo(id) {
+                const el = document.getElementById(id);
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+            }
+
+            /* ── show / hide nav & top btn ── */
+            const fNav = document.getElementById("floatingNav");
+            const sBtn = document.getElementById("scrollTopBtn");
+            window.addEventListener(
+                "scroll",
+                () => {
+                    const past = window.scrollY > window.innerHeight * 0.75;
+                    fNav.classList.toggle("visible", past);
+                    sBtn.classList.toggle("visible", past);
+                },
+                { passive: true },
+            );
+
+            /* ══════════════════════════════════════════
+               SCROLL SPY — FIXED
+               Uses scroll position to find which section
+               is currently "in view" at the top 40% of
+               the viewport, so the active icon always
+               follows the user as they scroll.
+            ══════════════════════════════════════════ */
+            const SECTIONS = [
+                "about",
+                "experience",
+                "projects",
+                "tech-stack",
+                "contact",
+            ];
+
+            function setActive(id) {
+                SECTIONS.forEach((s) => {
+                    const item = document.querySelector(
+                        `.nav-item[data-target="${s}"]`,
+                    );
+                    if (item) item.classList.toggle("active", s === id);
+                });
+            }
+
+            function getActiveSection() {
+                // trigger line = 40% down the viewport
+                const triggerY = window.scrollY + window.innerHeight * 0.4;
+                let best = null;
+                for (const id of SECTIONS) {
+                    const el = document.getElementById(id);
+                    if (!el) continue;
+                    if (el.offsetTop <= triggerY) {
+                        best = id;
+                    }
+                }
+                return best || SECTIONS[0];
+            }
+
+            window.addEventListener(
+                "scroll",
+                () => {
+                    setActive(getActiveSection());
+                },
+                { passive: true },
+            );
+
+            // Set initial active on load
+            window.addEventListener("load", () => {
+                setActive(getActiveSection());
+            });
+        </script>
+
+        <script type="text/babel" data-type="module">
+            const { useRef } = React;
+            const { motion, useInView, useScroll, useTransform } =
+                window.Motion;
+
+            const WordsPullUp = ({ text, className, showAsterisk }) => {
+                const ref = useRef(null);
+                const inView = useInView(ref, { once: true, margin: "-10%" });
+                const words = text.split(" ");
+                return (
+                    <div ref={ref} className={`flex flex-wrap ${className}`}>
+                        {words.map((w, i) => (
+                            <div
+                                key={i}
+                                className="overflow-hidden mr-[0.2em] relative flex items-start"
+                            >
+                                <motion.div
+                                    initial={{ y: "100%" }}
+                                    animate={inView ? { y: 0 } : { y: "100%" }}
+                                    transition={{
+                                        delay: i * 0.08,
+                                        duration: 0.8,
+                                        ease: [0.16, 1, 0.3, 1],
+                                    }}
+                                    className="inline-block relative"
+                                >
+                                    {w}
+                                    {showAsterisk && i === words.length - 1 && (
+                                        <span className="absolute top-[0.65em] -right-[0.3em] text-[0.31em] font-light">
+                                            *
+                                        </span>
+                                    )}
+                                </motion.div>
+                            </div>
+                        ))}
+                    </div>
+                );
+            };
+
+            const PullUpMulti = ({
+                segments,
+                className,
+                wrap = "justify-center",
+            }) => {
+                const ref = useRef(null);
+                const inView = useInView(ref, { once: true, margin: "-10%" });
+                let n = 0;
+                return (
+                    <div
+                        ref={ref}
+                        className={`inline-flex flex-wrap ${wrap} ${className}`}
+                    >
+                        {segments.map((seg, si) =>
+                            seg.text
+                                .split(" ")
+                                .filter(Boolean)
+                                .map((word, wi) => {
+                                    const idx = n++;
+                                    return (
+                                        <div
+                                            key={`${si}-${wi}`}
+                                            className="overflow-hidden mr-[0.25em] mb-[0.1em]"
+                                        >
+                                            <motion.div
+                                                initial={{ y: "100%" }}
+                                                animate={
+                                                    inView
+                                                        ? { y: 0 }
+                                                        : { y: "100%" }
+                                                }
+                                                transition={{
+                                                    delay: idx * 0.06,
+                                                    duration: 0.8,
+                                                    ease: [0.16, 1, 0.3, 1],
+                                                }}
+                                                className={`inline-block ${seg.cls || ""}`}
+                                            >
+                                                {word}
+                                            </motion.div>
+                                        </div>
+                                    );
+                                }),
+                        )}
+                    </div>
+                );
+            };
+
+            const RevealText = ({ text, className }) => {
+                const ref = useRef(null);
+                const { scrollYProgress } = useScroll({
+                    target: ref,
+                    offset: ["start 0.8", "end 0.2"],
+                });
+                const chars = text.split("");
+                return (
+                    <p ref={ref} className={`flex flex-wrap ${className}`}>
+                        {chars.map((c, i) => {
+                            const s = i / chars.length - 0.1,
+                                e = i / chars.length + 0.05;
+                            const op = useTransform(
+                                scrollYProgress,
+                                [Math.max(0, s), Math.min(1, e)],
+                                [0.15, 1],
+                            );
+                            return (
+                                <motion.span
+                                    key={i}
+                                    style={{ opacity: op }}
+                                    className="whitespace-pre"
+                                >
+                                    {c}
+                                </motion.span>
+                            );
+                        })}
+                    </p>
+                );
+            };
+
+            const FadeUp = ({ delay = 0, children, className = "" }) => {
+                const ref = useRef(null);
+                const inView = useInView(ref, { once: true, margin: "-80px" });
+                return (
+                    <motion.div
+                        ref={ref}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={
+                            inView
+                                ? { opacity: 1, y: 0 }
+                                : { opacity: 0, y: 30 }
+                        }
+                        transition={{
+                            duration: 0.8,
+                            delay,
+                            ease: [0.22, 1, 0.36, 1],
+                        }}
+                        className={className}
+                    >
+                        {children}
+                    </motion.div>
+                );
+            };
+
+            const GeoIcon = ({ type, color = "rgba(222,219,200,0.52)" }) => {
+                const s = color;
+                if (type === "sphere")
+                    return (
+                        <svg
+                            width="54"
+                            height="54"
+                            viewBox="0 0 54 54"
+                            fill="none"
+                        >
+                            <circle
+                                cx="27"
+                                cy="27"
+                                r="21"
+                                stroke={s}
+                                strokeWidth="1"
+                            />
+                            <ellipse
+                                cx="27"
+                                cy="27"
+                                rx="11"
+                                ry="21"
+                                stroke={s}
+                                strokeWidth="1"
+                            />
+                            <ellipse
+                                cx="27"
+                                cy="27"
+                                rx="21"
+                                ry="8"
+                                stroke={s}
+                                strokeWidth="1"
+                            />
+                            <line
+                                x1="6"
+                                y1="27"
+                                x2="48"
+                                y2="27"
+                                stroke={s}
+                                strokeWidth="0.6"
+                            />
+                        </svg>
+                    );
+                if (type === "star")
+                    return (
+                        <svg
+                            width="54"
+                            height="54"
+                            viewBox="0 0 54 54"
+                            fill="none"
+                        >
+                            {[0, 30, 60, 90, 120, 150].map((a) => {
+                                const r = (a * Math.PI) / 180;
+                                return (
+                                    <line
+                                        key={a}
+                                        x1="27"
+                                        y1="27"
+                                        x2={27 + 21 * Math.cos(r)}
+                                        y2={27 + 21 * Math.sin(r)}
+                                        stroke={s}
+                                        strokeWidth="1"
+                                    />
+                                );
+                            })}
+                            {[0, 30, 60, 90, 120, 150].map((a) => {
+                                const r = (a * Math.PI) / 180;
+                                return (
+                                    <line
+                                        key={`b${a}`}
+                                        x1="27"
+                                        y1="27"
+                                        x2={27 - 21 * Math.cos(r)}
+                                        y2={27 - 21 * Math.sin(r)}
+                                        stroke={s}
+                                        strokeWidth="1"
+                                    />
+                                );
+                            })}
+                            <circle
+                                cx="27"
+                                cy="27"
+                                r="4"
+                                stroke={s}
+                                strokeWidth="1"
+                            />
+                        </svg>
+                    );
+                if (type === "cube")
+                    return (
+                        <svg
+                            width="54"
+                            height="54"
+                            viewBox="0 0 54 54"
+                            fill="none"
+                        >
+                            <polygon
+                                points="27,5 47,16 47,38 27,49 7,38 7,16"
+                                stroke={s}
+                                strokeWidth="1"
+                                fill="none"
+                            />
+                            <line
+                                x1="27"
+                                y1="5"
+                                x2="27"
+                                y2="27"
+                                stroke={s}
+                                strokeWidth="0.7"
+                            />
+                            <line
+                                x1="7"
+                                y1="16"
+                                x2="27"
+                                y2="27"
+                                stroke={s}
+                                strokeWidth="0.7"
+                            />
+                            <line
+                                x1="47"
+                                y1="16"
+                                x2="27"
+                                y2="27"
+                                stroke={s}
+                                strokeWidth="0.7"
+                            />
+                            <line
+                                x1="27"
+                                y1="27"
+                                x2="27"
+                                y2="49"
+                                stroke={s}
+                                strokeWidth="0.7"
+                            />
+                            <line
+                                x1="27"
+                                y1="27"
+                                x2="7"
+                                y2="38"
+                                stroke={s}
+                                strokeWidth="0.7"
+                            />
+                            <line
+                                x1="27"
+                                y1="27"
+                                x2="47"
+                                y2="38"
+                                stroke={s}
+                                strokeWidth="0.7"
+                            />
+                        </svg>
+                    );
+                if (type === "spiral")
+                    return (
+                        <svg
+                            width="54"
+                            height="54"
+                            viewBox="0 0 54 54"
+                            fill="none"
+                        >
+                            {[21, 16, 11, 7, 4].map((r, i) => (
+                                <circle
+                                    key={i}
+                                    cx="27"
+                                    cy="27"
+                                    r={r}
+                                    stroke={s}
+                                    strokeWidth="0.8"
+                                />
+                            ))}
+                            <circle cx="27" cy="27" r="2" fill={s} />
+                        </svg>
+                    );
+                if (type === "dots")
+                    return (
+                        <svg
+                            width="54"
+                            height="54"
+                            viewBox="0 0 54 54"
+                            fill="none"
+                        >
+                            {[0, 1, 2, 3, 4, 5, 6].map((row) =>
+                                [0, 1, 2, 3, 4, 5, 6].map((col) => (
+                                    <circle
+                                        key={`${row}-${col}`}
+                                        cx={4 + col * 8}
+                                        cy={4 + row * 8}
+                                        r="1"
+                                        fill={s}
+                                        opacity={
+                                            (row + col) % 3 === 0 ? 0.15 : 1
+                                        }
+                                    />
+                                )),
+                            )}
+                        </svg>
+                    );
+                if (type === "cross")
+                    return (
+                        <svg
+                            width="54"
+                            height="54"
+                            viewBox="0 0 54 54"
+                            fill="none"
+                        >
+                            <line
+                                x1="27"
+                                y1="4"
+                                x2="27"
+                                y2="50"
+                                stroke={s}
+                                strokeWidth="1"
+                            />
+                            <line
+                                x1="4"
+                                y1="27"
+                                x2="50"
+                                y2="27"
+                                stroke={s}
+                                strokeWidth="1"
+                            />
+                            <line
+                                x1="11"
+                                y1="11"
+                                x2="43"
+                                y2="43"
+                                stroke={s}
+                                strokeWidth="0.55"
+                            />
+                            <line
+                                x1="43"
+                                y1="11"
+                                x2="11"
+                                y2="43"
+                                stroke={s}
+                                strokeWidth="0.55"
+                            />
+                            <circle
+                                cx="27"
+                                cy="27"
+                                r="5.5"
+                                stroke={s}
+                                strokeWidth="0.7"
+                            />
+                        </svg>
+                    );
+                return null;
+            };
+
+            const Hero = () => (
+                <section className="h-screen p-4 md:p-6 w-full bg-black flex flex-col">
+                    <div className="relative w-full h-full rounded-2xl md:rounded-[2rem] overflow-hidden flex-1 bg-[#101010]">
+                        <video
+                            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 noise-overlay opacity-50 mix-blend-overlay pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/75" />
+                        <nav className="absolute top-0 left-1/2 -translate-x-1/2 bg-black rounded-b-2xl md:rounded-b-3xl px-4 py-2 md:px-8 z-10 flex items-center gap-3 sm:gap-6 md:gap-10 lg:gap-14 shadow-2xl">
+                            {[
+                                ["About", "about"],
+                                ["Experience", "experience"],
+                                ["Projects", "projects"],
+                                ["Tech Stack", "tech-stack"],
+                                ["Contact", "contact"],
+                            ].map(([lbl, id]) => (
+                                <a
+                                    key={id}
+                                    href={`#${id}`}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        document
+                                            .getElementById(id)
+                                            ?.scrollIntoView({
+                                                behavior: "smooth",
+                                            });
+                                    }}
+                                    style={{
+                                        fontFamily: "'DM Sans',sans-serif",
+                                        fontSize: "11px",
+                                        fontWeight: 300,
+                                        letterSpacing: "0.06em",
+                                        color: "rgba(222,219,200,0.6)",
+                                        textDecoration: "none",
+                                        transition: "color 0.25s",
+                                    }}
+                                    onMouseEnter={(e) =>
+                                        (e.currentTarget.style.color =
+                                            "#dedbc8")
+                                    }
+                                    onMouseLeave={(e) =>
+                                        (e.currentTarget.style.color =
+                                            "rgba(222,219,200,0.6)")
+                                    }
+                                >
+                                    {lbl}
+                                </a>
+                            ))}
+                        </nav>
+                        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 lg:p-12 z-10">
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end">
+                                <div className="md:col-span-8">
+                                    <WordsPullUp
+                                        text="Afsal"
+                                        showAsterisk
+                                        className="font-display text-[26vw] sm:text-[24vw] md:text-[22vw] lg:text-[20vw] xl:text-[19vw] font-normal leading-[0.85] tracking-[-0.07em]"
+                                    />
+                                </div>
+                                <div className="md:col-span-4 flex flex-col items-start gap-5 md:gap-7 md:pb-4 lg:pb-6">
+                                    <motion.p
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{
+                                            delay: 0.5,
+                                            duration: 0.8,
+                                            ease: [0.16, 1, 0.3, 1],
+                                        }}
+                                        style={{
+                                            fontFamily:
+                                                "'Cormorant Garamond',serif",
+                                            fontSize: "clamp(16px,2vw,24px)",
+                                            lineHeight: 1.3,
+                                            color: "rgba(222,219,200,0.78)",
+                                            fontStyle: "italic",
+                                            fontWeight: 300,
+                                        }}
+                                    >
+                                        Crafting the invisible infrastructure
+                                        that powers the world's most ambitious
+                                        digital experiences.
+                                    </motion.p>
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{
+                                            delay: 0.75,
+                                            duration: 0.8,
+                                            ease: [0.16, 1, 0.3, 1],
+                                        }}
+                                    >
+                                        <a
+                                            href="https://linkedin.com/in/afsal-ahamed"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style={{
+                                                display: "inline-flex",
+                                                alignItems: "center",
+                                                gap: "10px",
+                                                background: "#dedbc8",
+                                                borderRadius: "999px",
+                                                padding: "5px 5px 5px 22px",
+                                                textDecoration: "none",
+                                                transition: "padding 0.3s",
+                                            }}
+                                            onMouseEnter={(e) =>
+                                                (e.currentTarget.style.paddingLeft =
+                                                    "26px")
+                                            }
+                                            onMouseLeave={(e) =>
+                                                (e.currentTarget.style.paddingLeft =
+                                                    "22px")
+                                            }
+                                        >
+                                            <span
+                                                style={{
+                                                    fontFamily:
+                                                        "'DM Sans',sans-serif",
+                                                    fontSize: "14px",
+                                                    fontWeight: 400,
+                                                    color: "#111",
+                                                    letterSpacing: "0.02em",
+                                                }}
+                                            >
+                                                LinkedIn
+                                            </span>
+                                            <div
+                                                style={{
+                                                    width: "40px",
+                                                    height: "40px",
+                                                    borderRadius: "999px",
+                                                    background: "#111",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    flexShrink: 0,
+                                                }}
+                                            >
+                                                <svg
+                                                    width="16"
+                                                    height="16"
+                                                    viewBox="0 0 16 16"
+                                                    fill="none"
+                                                >
+                                                    <path
+                                                        d="M3 8h10M9.5 4.5L13 8l-3.5 3.5"
+                                                        stroke="#dedbc8"
+                                                        strokeWidth="1.6"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                    />
+                                                </svg>
+                                            </div>
+                                        </a>
+                                    </motion.div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+
+            const About = () => (
+                <section
+                    id="about"
+                    className="bg-black py-20 md:py-32 px-4 md:px-8 flex justify-center"
+                >
+                    <div
+                        style={{
+                            background: "#0d0d0d",
+                            border: "1px solid rgba(222,219,200,0.05)",
+                            borderRadius: "2rem",
+                            width: "100%",
+                            maxWidth: "72rem",
+                            padding: "clamp(40px,8vw,96px)",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            textAlign: "center",
+                            gap: "40px",
+                        }}
+                    >
+                        <span
+                            style={{
+                                fontFamily: "'DM Sans',sans-serif",
+                                fontSize: "10px",
+                                letterSpacing: "0.22em",
+                                textTransform: "uppercase",
+                                color: "rgba(222,219,200,0.35)",
+                                fontWeight: 300,
+                            }}
+                        >
+                            Full-Stack Engineering
+                        </span>
+                        <PullUpMulti
+                            segments={[
+                                {
+                                    text: "I am Afsal Ahamed, ",
+                                    cls: "font-display font-normal",
+                                },
+                                {
+                                    text: "a senior software engineer. ",
+                                    cls: "font-display italic",
+                                },
+                                {
+                                    text: "I build real-time systems, scalable APIs, and AI-driven workflows.",
+                                    cls: "font-display font-normal",
+                                },
+                            ]}
+                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-w-4xl leading-[0.95] tracking-tight"
+                        />
+                        <div style={{ maxWidth: "600px" }}>
+                            <RevealText
+                                text="Over 5+ years, I have worked with Leisure Leagues, the world's largest independent 5/6-a-side football network with 3,000+ leagues, and Imara Software Solutions, building e-commerce platforms, real-time auction systems, and cross-platform mobile apps. I graduated from UCSC, University of Colombo."
+                                className="text-[#DEDBC8] text-xs sm:text-sm md:text-base justify-center font-light leading-relaxed tracking-wide"
+                            />
+                        </div>
+                    </div>
+                </section>
+            );
+
+            const Experience = () => {
+                const jobs = [
+                    {
+                        num: "01",
+                        company: "Leisure Leagues",
+                        role: "Senior Software Engineer · UK (Remote)",
+                        period: "Feb 2025 – Present",
+                        desc: "Architecting scalable platforms for 3,000+ football leagues. Real-time match broadcasting via Laravel WebSockets, Redis entity-based API caching, and AI-driven competition creation flows.",
+                    },
+                    {
+                        num: "02",
+                        company: "Imara Software",
+                        role: "Software Developer · Sri Lanka",
+                        period: "Aug 2021 – Feb 2025",
+                        desc: "Complex RESTful APIs for e-commerce, a real-time car auction system with live bidding safeguards, cross-platform Flutter & Firebase apps, and 25% ops reduction via automation.",
+                    },
+                    {
+                        num: "03",
+                        company: "Ecoz Labs",
+                        role: "Web Developer · Sri Lanka",
+                        period: "Jan 2017 – Dec 2017",
+                        desc: "Dynamic responsive web apps with PHP/MySQL, a hotel management system for booking & inventory, and web scraping pipelines for business data extraction.",
+                    },
+                ];
+                return (
+                    <section
+                        id="experience"
+                        className="bg-black relative py-20 md:py-32 px-4 md:px-6 overflow-hidden"
+                    >
+                        <div className="absolute inset-0 bg-noise opacity-[0.1] pointer-events-none z-[-1]" />
+                        <div
+                            style={{
+                                maxWidth: "1100px",
+                                margin: "0 auto",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "clamp(40px,6vw,80px)",
+                            }}
+                        >
+                            <h2 className="sh text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+                                Where I've built
+                                <br />
+                                <em>things that matter.</em>
+                            </h2>
+                            <div>
+                                {jobs.map((job, i) => (
+                                    <FadeUp key={i} delay={i * 0.1}>
+                                        <div className="exp-row">
+                                            <div className="exp-num-col">
+                                                {job.num}
+                                            </div>
+                                            <div>
+                                                <div className="exp-company">
+                                                    {job.company}
+                                                </div>
+                                                <div className="exp-role">
+                                                    {job.role}
+                                                </div>
+                                                <div className="exp-desc-text">
+                                                    {job.desc}
+                                                </div>
+                                                <div className="exp-divider">
+                                                    Highlights
+                                                </div>
+                                            </div>
+                                            <div className="exp-period-col">
+                                                {job.period}
+                                            </div>
+                                        </div>
+                                    </FadeUp>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                );
+            };
+
+            const Projects = () => {
+                const projects = [
+                    {
+                        num: "01",
+                        title: "Real-Time Football Score System",
+                        desc: "Laravel + WebSockets engine for live match state management and push notifications across 3,000+ leagues.",
+                        tags: ["Laravel", "WebSockets", "Redis"],
+                    },
+                    {
+                        num: "02",
+                        title: "Entity-Based API Caching",
+                        desc: "Redis-powered caching layer per season, tournament, and venue for high-performance data delivery at scale.",
+                        tags: ["Redis", "PHP", "API Design"],
+                    },
+                    {
+                        num: "03",
+                        title: "Cricket Companion App",
+                        desc: "Real-time stats and match tracking app built on Next.js and Supabase with live data streams.",
+                        tags: ["Next.js", "Supabase", "TypeScript"],
+                    },
+                    {
+                        num: "04",
+                        title: "Smart Venue Search",
+                        desc: "AI-integrated chatbot mapping natural language to API queries with AbortController for snappy performance.",
+                        tags: ["AI", "Node.js", "NLP"],
+                    },
+                ];
+                return (
+                    <section
+                        id="projects"
+                        className="bg-black py-20 md:py-32 px-4 md:px-6 overflow-hidden"
+                    >
+                        <div
+                            style={{
+                                maxWidth: "1100px",
+                                margin: "0 auto",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "clamp(40px,5vw,72px)",
+                            }}
+                        >
+                            <h2 className="sh text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+                                Selected <em>projects.</em>
+                                <br />
+                                <span
+                                    style={{
+                                        color: "rgba(222,219,200,0.22)",
+                                        fontSize: "0.48em",
+                                        fontStyle: "normal",
+                                        letterSpacing: "0.07em",
+                                        fontFamily: "'DM Sans',sans-serif",
+                                        fontWeight: 300,
+                                    }}
+                                >
+                                    Built with intent.
+                                </span>
+                            </h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                {projects.map((p, i) => (
+                                    <FadeUp key={i} delay={i * 0.1}>
+                                        <div
+                                            style={{
+                                                background: "#0e0e0e",
+                                                border: "1px solid rgba(222,219,200,0.08)",
+                                                borderRadius: "18px",
+                                                padding: "34px",
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                gap: "18px",
+                                                height: "100%",
+                                                transition:
+                                                    "background 0.3s,border-color 0.3s",
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.background =
+                                                    "#141414";
+                                                e.currentTarget.style.borderColor =
+                                                    "rgba(222,219,200,0.15)";
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.background =
+                                                    "#0e0e0e";
+                                                e.currentTarget.style.borderColor =
+                                                    "rgba(222,219,200,0.08)";
+                                            }}
+                                        >
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent:
+                                                        "space-between",
+                                                    alignItems: "flex-start",
+                                                }}
+                                            >
+                                                <span
+                                                    style={{
+                                                        fontFamily:
+                                                            "'DM Sans',sans-serif",
+                                                        fontSize: "12px",
+                                                        color: "rgba(222,219,200,0.55)",
+                                                        letterSpacing: "0.15em",
+                                                        fontWeight: 400,
+                                                    }}
+                                                >
+                                                    {p.num}
+                                                </span>
+                                                <svg
+                                                    width="18"
+                                                    height="18"
+                                                    viewBox="0 0 18 18"
+                                                    fill="none"
+                                                    style={{ opacity: 0.35 }}
+                                                >
+                                                    <path
+                                                        d="M4 14L14 4M14 4H7M14 4v7"
+                                                        stroke="#dedbc8"
+                                                        strokeWidth="1.2"
+                                                        strokeLinecap="round"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div style={{ flex: 1 }}>
+                                                <h3
+                                                    style={{
+                                                        fontFamily:
+                                                            "'Cormorant Garamond',serif",
+                                                        fontSize:
+                                                            "clamp(20px,2.4vw,28px)",
+                                                        fontWeight: 600,
+                                                        color: "#dedbc8",
+                                                        lineHeight: 1.2,
+                                                        marginBottom: "12px",
+                                                    }}
+                                                >
+                                                    {p.title}
+                                                </h3>
+                                                <p
+                                                    style={{
+                                                        fontFamily:
+                                                            "'DM Sans',sans-serif",
+                                                        fontSize: "12px",
+                                                        fontWeight: 300,
+                                                        color: "rgba(222,219,200,0.45)",
+                                                        lineHeight: 1.85,
+                                                    }}
+                                                >
+                                                    {p.desc}
+                                                </p>
+                                            </div>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    flexWrap: "wrap",
+                                                    gap: "7px",
+                                                    paddingTop: "18px",
+                                                    borderTop:
+                                                        "1px solid rgba(222,219,200,0.08)",
+                                                }}
+                                            >
+                                                {p.tags.map((t, j) => (
+                                                    <span
+                                                        key={j}
+                                                        style={{
+                                                            fontFamily:
+                                                                "'DM Sans',sans-serif",
+                                                            fontSize: "9px",
+                                                            color: "rgba(222,219,200,0.45)",
+                                                            fontWeight: 300,
+                                                            letterSpacing:
+                                                                "0.14em",
+                                                            textTransform:
+                                                                "uppercase",
+                                                            padding: "4px 11px",
+                                                            borderRadius:
+                                                                "999px",
+                                                            border: "1px solid rgba(222,219,200,0.15)",
+                                                        }}
+                                                    >
+                                                        {t}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </FadeUp>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                );
+            };
+
+            const TechStack = () => {
+                const cards = [
+                    {
+                        v: "tc-dark",
+                        icon: "sphere",
+                        num: "01",
+                        iconColor: "rgba(222,219,200,0.6)",
+                        label: "Backend",
+                        desc: "PHP (Laravel) · Node.js · Python · REST APIs · WebSockets · Socket.io · Redis · MySQL",
+                        tags: [
+                            { text: "Core Stack", cls: "tag-outline-light" },
+                        ],
+                    },
+                    {
+                        v: "tc-orange",
+                        icon: "cube",
+                        num: "02",
+                        iconColor: "rgba(255,255,255,0.75)",
+                        label: "Full Data Stack",
+                        desc: "End-to-end ownership of data architecture — schema design to real-time delivery at scale.",
+                        tags: [
+                            {
+                                text: "More visibility",
+                                cls: "tag-outline-white",
+                            },
+                            {
+                                text: "More engagement",
+                                cls: "tag-filled-black",
+                            },
+                        ],
+                    },
+                    {
+                        v: "tc-charcoal",
+                        icon: "star",
+                        num: "03",
+                        iconColor: "rgba(222,219,200,0.55)",
+                        label: "Frontend",
+                        desc: "React · Next.js · Vue.js · TypeScript · Tailwind CSS · ShadCN UI · jQuery · HTML5/CSS3",
+                        tags: [
+                            { text: "UI/UX Focused", cls: "tag-outline-light" },
+                        ],
+                    },
+                    {
+                        v: "tc-cream",
+                        icon: "dots",
+                        num: "04",
+                        iconColor: "rgba(17,17,17,0.55)",
+                        label: "Mobile & Low Code",
+                        desc: "Flutter · React Native · Dart · Frappe Framework — shipping to iOS, Android and web.",
+                        tags: [
+                            { text: "Cross-Platform", cls: "tag-outline-dark" },
+                        ],
+                    },
+                    {
+                        v: "tc-dark",
+                        icon: "spiral",
+                        num: "05",
+                        iconColor: "rgba(222,219,200,0.6)",
+                        label: "Tools & Automation",
+                        desc: "Git · Docker · Make.com · Google Apps Script · Postman · Supabase · Firebase",
+                        tags: [{ text: "DevOps", cls: "tag-outline-light" }],
+                    },
+                    {
+                        v: "tc-dark",
+                        icon: "cross",
+                        num: "06",
+                        iconColor: "rgba(222,219,200,0.6)",
+                        label: "AI & Integration",
+                        desc: "Conversational AI · NLP mapping · AbortController · OpenAI integration · vector search",
+                        tags: [{ text: "AI-Powered", cls: "tag-filled-light" }],
+                    },
+                ];
+                return (
+                    <section
+                        id="tech-stack"
+                        className="bg-black relative py-20 md:py-32 px-4 md:px-6 overflow-hidden"
+                    >
+                        <div className="absolute inset-0 bg-noise opacity-[0.1] pointer-events-none z-[-1]" />
+                        <div
+                            style={{
+                                maxWidth: "1100px",
+                                margin: "0 auto",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "clamp(40px,5vw,72px)",
+                            }}
+                        >
+                            <h2 className="sh text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+                                Studio-grade <em>tech stack.</em>
+                                <br />
+                                <span
+                                    style={{
+                                        color: "rgba(222,219,200,0.22)",
+                                        fontSize: "0.48em",
+                                        fontStyle: "normal",
+                                        letterSpacing: "0.07em",
+                                        fontFamily: "'DM Sans',sans-serif",
+                                        fontWeight: 300,
+                                    }}
+                                >
+                                    Built for scale.
+                                </span>
+                            </h2>
+                            <div className="tech-grid">
+                                {cards.map((c, i) => (
+                                    <FadeUp key={i} delay={i * 0.08}>
+                                        <div className={`tc ${c.v} h-full`}>
+                                            <div className="tc-num">
+                                                {c.num}
+                                            </div>
+                                            <GeoIcon
+                                                type={c.icon}
+                                                color={c.iconColor}
+                                            />
+                                            <div
+                                                style={{
+                                                    flex: 1,
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    gap: "10px",
+                                                }}
+                                            >
+                                                <div className="tc-label">
+                                                    {c.label}
+                                                </div>
+                                                <div className="tc-desc">
+                                                    {c.desc}
+                                                </div>
+                                            </div>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    flexWrap: "wrap",
+                                                    gap: "7px",
+                                                }}
+                                            >
+                                                {c.tags.map((t, j) => (
+                                                    <span
+                                                        key={j}
+                                                        className={`tc-tag ${t.cls}`}
+                                                    >
+                                                        {t.text}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </FadeUp>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                );
+            };
+
+            const Education = () => (
+                <section className="bg-black py-20 md:py-32 px-4 md:px-8 flex justify-center">
+                    <div
+                        style={{
+                            background: "#0d0d0d",
+                            border: "1px solid rgba(222,219,200,0.05)",
+                            borderRadius: "2rem",
+                            width: "100%",
+                            maxWidth: "72rem",
+                            padding: "clamp(40px,8vw,96px)",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            textAlign: "center",
+                            gap: "40px",
+                        }}
+                    >
+                        <span
+                            style={{
+                                fontFamily: "'DM Sans',sans-serif",
+                                fontSize: "10px",
+                                letterSpacing: "0.22em",
+                                textTransform: "uppercase",
+                                color: "rgba(222,219,200,0.32)",
+                                fontWeight: 300,
+                            }}
+                        >
+                            Education
+                        </span>
+                        <h2 className="sh text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-w-4xl">
+                            Bachelor of <em>Information Technology</em>
+                        </h2>
+                        <div style={{ maxWidth: "560px" }}>
+                            <RevealText
+                                text="University of Colombo School of Computing (UCSC), Sri Lanka — 2016 to 2020. A rigorous four-year programme in information technology, laying the foundation for a career in high-performance software engineering."
+                                className="text-[#DEDBC8] text-xs sm:text-sm md:text-base justify-center font-light leading-relaxed tracking-wide"
+                            />
+                        </div>
+                    </div>
+                </section>
+            );
+
+            const Contact = () => (
+                <section id="contact" className="bg-black overflow-hidden">
+                    <FadeUp>
+                        <div
+                            style={{
+                                width: "100%",
+                                background: "#080808",
+                                minHeight: "88vh",
+                                display: "flex",
+                            }}
+                        >
+                            <div
+                                style={{
+                                    flex: "0 0 48%",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "space-between",
+                                    padding: "clamp(48px,7vw,110px)",
+                                    borderRight:
+                                        "1px solid rgba(222,219,200,0.05)",
+                                }}
+                            >
+                                <span
+                                    style={{
+                                        fontFamily: "'DM Sans',sans-serif",
+                                        fontSize: "9px",
+                                        letterSpacing: "0.22em",
+                                        textTransform: "uppercase",
+                                        color: "rgba(222,219,200,0.28)",
+                                        fontWeight: 300,
+                                    }}
+                                >
+                                    Get in touch
+                                </span>
+                                <div>
+                                    <h2
+                                        className="font-display"
+                                        style={{
+                                            fontSize:
+                                                "clamp(60px,10.5vw,148px)",
+                                            fontWeight: 900,
+                                            lineHeight: 0.85,
+                                            letterSpacing: "-0.045em",
+                                            color: "#dedbc8",
+                                        }}
+                                    >
+                                        LET'S
+                                        <br />
+                                        GET IN
+                                        <br />
+                                        TOUCH
+                                    </h2>
+                                    <div style={{ marginTop: "40px" }}>
+                                        <svg
+                                            width="66"
+                                            height="66"
+                                            viewBox="0 0 66 66"
+                                            fill="none"
+                                        >
+                                            <circle
+                                                cx="43"
+                                                cy="17"
+                                                r="14"
+                                                stroke="rgba(222,219,200,0.32)"
+                                                strokeWidth="1"
+                                            />
+                                            <line
+                                                x1="43"
+                                                y1="17"
+                                                x2="10"
+                                                y2="58"
+                                                stroke="rgba(222,219,200,0.22)"
+                                                strokeWidth="1"
+                                            />
+                                            <line
+                                                x1="43"
+                                                y1="31"
+                                                x2="10"
+                                                y2="58"
+                                                stroke="rgba(222,219,200,0.12)"
+                                                strokeWidth="0.8"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p
+                                        style={{
+                                            fontFamily:
+                                                "'Cormorant Garamond',serif",
+                                            fontSize: "15px",
+                                            fontStyle: "italic",
+                                            color: "rgba(222,219,200,0.32)",
+                                            fontWeight: 300,
+                                            letterSpacing: "0.03em",
+                                        }}
+                                    >
+                                        Puttalam, Sri Lanka
+                                    </p>
+                                    <p
+                                        style={{
+                                            fontFamily: "'DM Sans',sans-serif",
+                                            fontSize: "11px",
+                                            color: "rgba(222,219,200,0.2)",
+                                            fontWeight: 300,
+                                            letterSpacing: "0.08em",
+                                            marginTop: "5px",
+                                        }}
+                                    >
+                                        +94-718952288
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                style={{
+                                    flex: 1,
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "center",
+                                    padding: "clamp(48px,7vw,110px)",
+                                    gap: "56px",
+                                }}
+                            >
+                                <div>
+                                    <div
+                                        style={{
+                                            fontFamily: "'DM Sans',sans-serif",
+                                            fontSize: "9px",
+                                            letterSpacing: "0.22em",
+                                            textTransform: "uppercase",
+                                            color: "rgba(222,219,200,0.28)",
+                                            fontWeight: 300,
+                                            marginBottom: "24px",
+                                        }}
+                                    >
+                                        Email
+                                    </div>
+                                    <a
+                                        href="mailto:afsalpx@gmail.com"
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "space-between",
+                                            textDecoration: "none",
+                                            paddingBottom: "22px",
+                                            borderBottom:
+                                                "1px solid rgba(222,219,200,0.1)",
+                                            transition: "border-color 0.3s",
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.borderBottomColor =
+                                                "rgba(222,219,200,0.38)";
+                                            e.currentTarget.querySelector(
+                                                ".arr",
+                                            ).style.transform =
+                                                "translate(5px,-5px)";
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.borderBottomColor =
+                                                "rgba(222,219,200,0.1)";
+                                            e.currentTarget.querySelector(
+                                                ".arr",
+                                            ).style.transform =
+                                                "translate(0,0)";
+                                        }}
+                                    >
+                                        <span
+                                            style={{
+                                                fontFamily:
+                                                    "'Playfair Display',serif",
+                                                fontSize:
+                                                    "clamp(20px,3.2vw,44px)",
+                                                fontWeight: 400,
+                                                color: "#dedbc8",
+                                                letterSpacing: "-0.025em",
+                                            }}
+                                        >
+                                            afsalpx@gmail.com
+                                        </span>
+                                        <div
+                                            className="arr"
+                                            style={{
+                                                width: "52px",
+                                                height: "52px",
+                                                borderRadius: "999px",
+                                                border: "1px solid rgba(222,219,200,0.18)",
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                flexShrink: 0,
+                                                marginLeft: "20px",
+                                                transition:
+                                                    "transform 0.3s ease",
+                                            }}
+                                        >
+                                            <svg
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 20 20"
+                                                fill="none"
+                                            >
+                                                <path
+                                                    d="M4 16L16 4M16 4H8M16 4v8"
+                                                    stroke="rgba(222,219,200,0.6)"
+                                                    strokeWidth="1.2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: "14px",
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            fontFamily: "'DM Sans',sans-serif",
+                                            fontSize: "9px",
+                                            letterSpacing: "0.22em",
+                                            textTransform: "uppercase",
+                                            color: "rgba(222,219,200,0.28)",
+                                            fontWeight: 300,
+                                        }}
+                                    >
+                                        Elsewhere
+                                    </div>
+                                    <div
+                                        style={{ display: "flex", gap: "28px" }}
+                                    >
+                                        {[
+                                            [
+                                                "LinkedIn",
+                                                "https://linkedin.com/in/afsal-ahamed",
+                                            ],
+                                            [
+                                                "GitHub",
+                                                "https://github.com/Afsalbro",
+                                            ],
+                                        ].map(([lbl, url]) => (
+                                            <a
+                                                key={lbl}
+                                                href={url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                style={{
+                                                    fontFamily:
+                                                        "'DM Sans',sans-serif",
+                                                    fontSize: "11px",
+                                                    fontWeight: 300,
+                                                    letterSpacing: "0.12em",
+                                                    textTransform: "uppercase",
+                                                    color: "rgba(222,219,200,0.32)",
+                                                    textDecoration: "none",
+                                                    transition: "color 0.25s",
+                                                }}
+                                                onMouseEnter={(e) =>
+                                                    (e.currentTarget.style.color =
+                                                        "rgba(222,219,200,0.75)")
+                                                }
+                                                onMouseLeave={(e) =>
+                                                    (e.currentTarget.style.color =
+                                                        "rgba(222,219,200,0.32)")
+                                                }
+                                            >
+                                                {lbl}
+                                            </a>
+                                        ))}
+                                    </div>
+                                </div>
+                                <p
+                                    style={{
+                                        fontFamily:
+                                            "'Cormorant Garamond',serif",
+                                        fontSize: "17px",
+                                        fontStyle: "italic",
+                                        fontWeight: 300,
+                                        color: "rgba(222,219,200,0.18)",
+                                        maxWidth: "340px",
+                                        lineHeight: 1.65,
+                                    }}
+                                >
+                                    Let's build something remarkable together.
+                                </p>
+                            </div>
+                        </div>
+                    </FadeUp>
+                </section>
+            );
+
+            const App = () => (
+                <main
+                    style={{
+                        width: "100%",
+                        background: "#000",
+                        minHeight: "100vh",
+                    }}
+                >
+                    <Hero />
+                    <About />
+                    <Experience />
+                    <Projects />
+                    <TechStack />
+                    <Education />
+                    <Contact />
+                </main>
+            );
+
+            ReactDOM.createRoot(document.getElementById("root")).render(
+                <App />,
+            );
+        </script>
+    </body>
+</html>
