@@ -49,7 +49,7 @@
       }
 
       /* ══════════════════════════════
-             PRELOADER — full-page GIF + rich indicators
+             PRELOADER — full-page GIF + beautiful bar
          ══════════════════════════════ */
       #preloader {
         position: fixed;
@@ -57,8 +57,7 @@
         z-index: 9999;
         background: #000;
         overflow: hidden;
-        /* slide-down exit */
-        transition: transform 1.1s cubic-bezier(0.76, 0, 0.24, 1);
+        transition: transform 1.15s cubic-bezier(0.76, 0, 0.24, 1);
         will-change: transform;
       }
       #preloader.slide-out {
@@ -66,87 +65,30 @@
         pointer-events: none;
       }
 
-      /* full-page gif */
       #pl-gif {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        opacity: 0.82;
+        opacity: 0.8;
       }
 
-      /* layered overlay — heavier at bottom */
+      /* deep vignette — heavier at bottom so bar reads clearly */
       #pl-overlay {
         position: absolute;
         inset: 0;
         background: linear-gradient(
           to bottom,
-          rgba(0, 0, 0, 0.5) 0%,
-          rgba(0, 0, 0, 0.1) 35%,
-          rgba(0, 0, 0, 0.6) 72%,
-          rgba(0, 0, 0, 0.92) 100%
+          rgba(0, 0, 0, 0.45) 0%,
+          rgba(0, 0, 0, 0.05) 30%,
+          rgba(0, 0, 0, 0.55) 65%,
+          rgba(0, 0, 0, 0.96) 100%
         );
         pointer-events: none;
       }
 
-      /* ── top-left name ── */
-      #pl-name {
-        position: absolute;
-        top: clamp(24px, 4vw, 44px);
-        left: clamp(24px, 4vw, 44px);
-        font-family: "Cormorant Garamond", serif;
-        font-size: clamp(12px, 2vw, 16px);
-        font-style: italic;
-        font-weight: 300;
-        letter-spacing: 0.06em;
-        color: rgba(222, 219, 200, 0.55);
-        z-index: 2;
-      }
-
-      /* ── top-right status badge ── */
-      #pl-badge {
-        position: absolute;
-        top: clamp(22px, 4vw, 42px);
-        right: clamp(24px, 4vw, 44px);
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(222, 219, 200, 0.06);
-        border: 1px solid rgba(222, 219, 200, 0.13);
-        border-radius: 999px;
-        padding: 6px 14px 6px 10px;
-        backdrop-filter: blur(8px);
-      }
-      #pl-badge-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: rgba(222, 219, 200, 0.7);
-        animation: badgePulse 1.4s ease-in-out infinite;
-      }
-      @keyframes badgePulse {
-        0%,
-        100% {
-          opacity: 0.3;
-          transform: scale(0.85);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1.15);
-        }
-      }
-      #pl-badge-txt {
-        font-family: "DM Sans", sans-serif;
-        font-size: 9px;
-        font-weight: 300;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color: rgba(222, 219, 200, 0.6);
-      }
-
-      /* ── bottom UI container ── */
+      /* ── bottom container ── */
       #pl-ui {
         position: absolute;
         bottom: 0;
@@ -156,196 +98,171 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 0 clamp(28px, 6vw, 80px) clamp(44px, 8vh, 88px);
         gap: 0;
-        padding-bottom: clamp(40px, 7vh, 80px);
-      }
-
-      /* ── circular spinner ring ── */
-      #pl-ring-wrap {
-        position: relative;
-        width: 72px;
-        height: 72px;
-        margin-bottom: 28px;
-        flex-shrink: 0;
-      }
-      #pl-ring-bg {
-        position: absolute;
-        inset: 0;
-        border-radius: 50%;
-        border: 1px solid rgba(222, 219, 200, 0.1);
-      }
-      #pl-ring-svg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        transform: rotate(-90deg);
-      }
-      #pl-ring-circle {
-        cx: 36;
-        cy: 36;
-        r: 33;
-        fill: none;
-        stroke: rgba(222, 219, 200, 0.85);
-        stroke-width: 1.2;
-        stroke-linecap: round;
-        stroke-dasharray: 207.3; /* 2π×33 */
-        stroke-dashoffset: 207.3;
-        transition: stroke-dashoffset 0.12s linear;
-      }
-      /* pulse ring behind circle */
-      #pl-ring-pulse {
-        position: absolute;
-        inset: -8px;
-        border-radius: 50%;
-        border: 1px solid rgba(222, 219, 200, 0.08);
-        animation: ringPulse 2s ease-in-out infinite;
-      }
-      @keyframes ringPulse {
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 0.4;
-        }
-        50% {
-          transform: scale(1.12);
-          opacity: 0;
-        }
-      }
-      /* large pct inside ring */
-      #pl-ring-pct {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "DM Sans", sans-serif;
-        font-size: 14px;
-        font-weight: 300;
-        letter-spacing: 0.04em;
-        color: rgba(222, 219, 200, 0.85);
       }
 
       /* ── status text ── */
       #pl-loading-text {
         font-family: "DM Sans", sans-serif;
-        font-size: clamp(9px, 1.6vw, 11px);
+        font-size: clamp(9px, 1.4vw, 11px);
         font-weight: 300;
-        letter-spacing: 0.38em;
+        letter-spacing: 0.42em;
         text-transform: uppercase;
-        color: rgba(222, 219, 200, 0.55);
-        min-height: 18px;
-        margin-bottom: 22px;
-        transition: opacity 0.35s ease;
+        color: rgba(222, 219, 200, 0.45);
+        margin-bottom: 20px;
+        transition: opacity 0.4s ease;
+        text-align: center;
       }
 
-      /* ── wide progress bar ── */
-      #pl-bar-wrap {
-        width: clamp(260px, 52vw, 560px);
-        height: 2px;
-        background: rgba(222, 219, 200, 0.08);
+      /* ══ THE BAR SYSTEM ══ */
+
+      /* outermost glow halo behind the whole bar */
+      #pl-bar-glow-outer {
+        width: 100%;
+        position: relative;
+        margin-bottom: 10px;
+        /* soft ambient glow beneath */
+        filter: drop-shadow(0 0 18px rgba(222, 219, 200, 0.12))
+          drop-shadow(0 0 6px rgba(222, 219, 200, 0.08));
+      }
+
+      /* track */
+      #pl-bar-track {
+        width: 100%;
+        height: 3px;
+        background: rgba(222, 219, 200, 0.07);
+        border-radius: 999px;
+        position: relative;
+        overflow: visible;
+      }
+
+      /* segmented tick marks baked into the track */
+      #pl-bar-track::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 999px;
+        background: repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent calc(25% - 0.5px),
+          rgba(222, 219, 200, 0.12) calc(25% - 0.5px),
+          rgba(222, 219, 200, 0.12) calc(25% + 0.5px),
+          transparent calc(25% + 0.5px)
+        );
+        pointer-events: none;
+      }
+
+      /* fill layer */
+      #pl-bar-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 0%;
         border-radius: 999px;
         overflow: hidden;
-        margin-bottom: 14px;
-        position: relative;
-      }
-      #pl-bar {
-        height: 100%;
-        width: 0%;
+        /* base fill */
         background: linear-gradient(
           90deg,
-          rgba(222, 219, 200, 0.2) 0%,
-          rgba(222, 219, 200, 0.95) 100%
+          rgba(180, 178, 158, 0.6) 0%,
+          rgba(222, 219, 200, 0.88) 60%,
+          rgba(240, 238, 218, 1) 100%
         );
-        border-radius: 999px;
-        position: relative;
       }
-      /* shimmer on bar */
-      #pl-bar::after {
+
+      /* travelling shimmer inside the fill */
+      #pl-bar-fill::after {
         content: "";
         position: absolute;
         top: 0;
-        right: 0;
         bottom: 0;
-        width: 60px;
+        left: -100%;
+        width: 60%;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0) 25%,
+          rgba(255, 255, 255, 0.55) 50%,
+          rgba(255, 255, 255, 0) 75%,
+          transparent 100%
+        );
+        animation: fillShimmer 1.8s ease-in-out infinite;
+      }
+      @keyframes fillShimmer {
+        0% {
+          left: -60%;
+        }
+        100% {
+          left: 110%;
+        }
+      }
+
+      /* bright leading-edge orb */
+      #pl-bar-head {
+        position: absolute;
+        top: 50%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow:
+          0 0 6px 2px rgba(255, 255, 255, 0.9),
+          0 0 18px 5px rgba(222, 219, 200, 0.55),
+          0 0 38px 8px rgba(222, 219, 200, 0.22);
+        opacity: 0; /* shown via JS once > 1% */
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+      }
+
+      /* glow line that bleeds below the track */
+      #pl-bar-bloom {
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 0%;
+        height: 14px;
+        border-radius: 999px;
         background: linear-gradient(
           90deg,
           transparent,
-          rgba(255, 255, 255, 0.55),
-          transparent
+          rgba(222, 219, 200, 0.12) 40%,
+          rgba(222, 219, 200, 0.28) 100%
         );
-        animation: barShimmer 1.4s ease-in-out infinite;
-      }
-      @keyframes barShimmer {
-        0% {
-          opacity: 0;
-          transform: translateX(-30px);
-        }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-          transform: translateX(10px);
-        }
+        filter: blur(6px);
+        pointer-events: none;
       }
 
-      /* ── tick marks below bar ── */
-      #pl-ticks {
-        width: clamp(260px, 52vw, 560px);
+      /* ── percentage row (below bar) ── */
+      #pl-bar-meta {
+        width: 100%;
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        margin-bottom: 22px;
+        margin-top: 0;
       }
-      .pl-tick {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
+      #pl-pct {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 5vw, 52px);
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        color: rgba(222, 219, 200, 0.72);
+        line-height: 1;
+        font-style: italic;
+        transition: opacity 0.2s ease;
       }
-      .pl-tick-line {
-        width: 1px;
-        height: 5px;
-        background: rgba(222, 219, 200, 0.2);
-        transition: background 0.4s ease;
-      }
-      .pl-tick-line.lit {
-        background: rgba(222, 219, 200, 0.65);
-      }
-      .pl-tick-lbl {
+      #pl-phase-label {
         font-family: "DM Sans", sans-serif;
-        font-size: 8px;
+        font-size: clamp(8px, 1.2vw, 10px);
         font-weight: 300;
-        letter-spacing: 0.12em;
-        color: rgba(222, 219, 200, 0.2);
-        transition: color 0.4s ease;
-      }
-      .pl-tick-lbl.lit {
-        color: rgba(222, 219, 200, 0.55);
-      }
-
-      /* ── animated dots row ── */
-      #pl-dots {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-      }
-      .pl-dot {
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background: rgba(222, 219, 200, 0.18);
-        transition:
-          background 0.35s ease,
-          transform 0.35s ease;
-      }
-      .pl-dot.active {
-        background: rgba(222, 219, 200, 0.75);
-        transform: scale(1.5);
-      }
-      .pl-dot.done {
-        background: rgba(222, 219, 200, 0.38);
-        transform: scale(1);
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(222, 219, 200, 0.25);
+        text-align: right;
+        transition: opacity 0.4s ease;
       }
 
       /* ══ TECH CARDS ══ */
@@ -875,100 +792,29 @@
   <body>
     <!-- ══ PRELOADER ══ -->
     <div id="preloader">
-      <!-- full-page GIF -->
       <img
         id="pl-gif"
         src="https://i.pinimg.com/originals/15/e0/8e/15e08e826755c1dce261e0a9e5018b8c.gif"
         alt=""
       />
-
-      <!-- gradient overlay -->
       <div id="pl-overlay"></div>
 
-      <!-- top-left name -->
-      <div id="pl-name">Afsal Ahamed</div>
-
-      <!-- top-right live badge -->
-      <div id="pl-badge">
-        <div id="pl-badge-dot"></div>
-        <span id="pl-badge-txt">Loading</span>
-      </div>
-
-      <!-- bottom UI -->
       <div id="pl-ui">
-        <!-- circular progress ring -->
-        <div id="pl-ring-wrap">
-          <div id="pl-ring-pulse"></div>
-          <div id="pl-ring-bg"></div>
-          <svg id="pl-ring-svg" viewBox="0 0 72 72">
-            <!-- track -->
-            <circle
-              cx="36"
-              cy="36"
-              r="33"
-              fill="none"
-              stroke="rgba(222,219,200,0.08)"
-              stroke-width="1.2"
-            />
-            <!-- progress arc -->
-            <circle
-              id="pl-ring-circle"
-              cx="36"
-              cy="36"
-              r="33"
-              fill="none"
-              stroke="rgba(222,219,200,0.85)"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-dasharray="207.3"
-              stroke-dashoffset="207.3"
-              style="
-                transform: rotate(-90deg);
-                transform-origin: center;
-                transition: stroke-dashoffset 0.1s linear;
-              "
-            />
-          </svg>
-          <div id="pl-ring-pct">0%</div>
-        </div>
-
-        <!-- status text -->
         <div id="pl-loading-text">Initialising systems...</div>
 
-        <!-- wide bar -->
-        <div id="pl-bar-wrap">
-          <div id="pl-bar"></div>
-        </div>
-
-        <!-- tick markers: 0 — 25 — 50 — 75 — 100 -->
-        <div id="pl-ticks">
-          <div class="pl-tick">
-            <div class="pl-tick-line" data-at="0"></div>
-            <span class="pl-tick-lbl" data-at="0">0</span>
-          </div>
-          <div class="pl-tick">
-            <div class="pl-tick-line" data-at="25"></div>
-            <span class="pl-tick-lbl" data-at="25">25</span>
-          </div>
-          <div class="pl-tick">
-            <div class="pl-tick-line" data-at="50"></div>
-            <span class="pl-tick-lbl" data-at="50">50</span>
-          </div>
-          <div class="pl-tick">
-            <div class="pl-tick-line" data-at="75"></div>
-            <span class="pl-tick-lbl" data-at="75">75</span>
-          </div>
-          <div class="pl-tick">
-            <div class="pl-tick-line" data-at="100"></div>
-            <span class="pl-tick-lbl" data-at="100">100</span>
+        <!-- the bar system -->
+        <div id="pl-bar-glow-outer">
+          <div id="pl-bar-track">
+            <div id="pl-bar-fill"></div>
+            <div id="pl-bar-head"></div>
+            <div id="pl-bar-bloom"></div>
           </div>
         </div>
 
-        <!-- phase dots: slow · medium · fast -->
-        <div id="pl-dots">
-          <div class="pl-dot active" id="plDot0"></div>
-          <div class="pl-dot" id="plDot1"></div>
-          <div class="pl-dot" id="plDot2"></div>
+        <!-- percentage + phase label BELOW the bar -->
+        <div id="pl-bar-meta">
+          <div id="pl-pct">0%</div>
+          <div id="pl-phase-label">Slow</div>
         </div>
       </div>
     </div>
@@ -1180,69 +1026,55 @@
     <script>
       /* ══════════════════════════════
              PRELOADER LOGIC
-             0–50 %  : SLOW   (~5 000 ms)
-             51–80 % : MEDIUM (~1 100 ms)
-             81–100% : FAST   (~  400 ms)
+             0–50 %  : SLOW   (~5 500 ms, ease-in-out)
+             51–80 % : MEDIUM (~1 100 ms, linear)
+             81–100% : FAST   (~  380 ms, linear)
              Exit: preloader slides DOWN, portfolio rises UP
          ══════════════════════════════ */
       (function () {
-        const bar = document.getElementById("pl-bar");
-        const ringCircle = document.getElementById("pl-ring-circle");
-        const ringPct = document.getElementById("pl-ring-pct");
+        const fill = document.getElementById("pl-bar-fill");
+        const head = document.getElementById("pl-bar-head");
+        const bloom = document.getElementById("pl-bar-bloom");
+        const pctEl = document.getElementById("pl-pct");
         const textEl = document.getElementById("pl-loading-text");
-        const badgeTxt = document.getElementById("pl-badge-txt");
+        const phaseLabel = document.getElementById("pl-phase-label");
         const preloader = document.getElementById("preloader");
         const root = document.getElementById("root");
-        const tickLines = document.querySelectorAll(".pl-tick-line");
-        const tickLabels = document.querySelectorAll(".pl-tick-lbl");
-        const dots = [
-          document.getElementById("plDot0"),
-          document.getElementById("plDot1"),
-          document.getElementById("plDot2"),
-        ];
 
-        const CIRCUMFERENCE = 2 * Math.PI * 33; // ≈ 207.3
-
-        // Phase config
         const phases = [
           {
             from: 0,
             to: 50,
-            ms: 5000,
+            ms: 5500,
             label: "Initialising systems...",
-            badge: "Loading",
-            dotIdx: 0,
+            phase: "Slow",
           },
           {
             from: 50,
             to: 80,
             ms: 1100,
             label: "Compiling portfolio...",
-            badge: "Processing",
-            dotIdx: 1,
+            phase: "Loading",
           },
           {
             from: 80,
             to: 100,
-            ms: 400,
+            ms: 380,
             label: "Almost there...",
-            badge: "Ready",
-            dotIdx: 2,
+            phase: "Fast",
           },
         ];
+
+        function easeInOut(t) {
+          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        }
 
         function getProgress(elapsed) {
           let cum = 0;
           for (const ph of phases) {
             if (elapsed <= cum + ph.ms) {
               const t = (elapsed - cum) / ph.ms;
-              // ease-in-out for slow phase, linear for others
-              const eased =
-                ph.dotIdx === 0
-                  ? t < 0.5
-                    ? 2 * t * t
-                    : -1 + (4 - 2 * t) * t // ease-in-out
-                  : t;
+              const eased = ph.phase === "Slow" ? easeInOut(t) : t;
               return ph.from + (ph.to - ph.from) * eased;
             }
             cum += ph.ms;
@@ -1256,84 +1088,63 @@
           return phases[2];
         }
 
-        // Update tick highlights
-        function updateTicks(pct) {
-          tickLines.forEach((el) => {
-            const at = parseFloat(el.dataset.at);
-            el.classList.toggle("lit", pct >= at);
-          });
-          tickLabels.forEach((el) => {
-            const at = parseFloat(el.dataset.at);
-            el.classList.toggle("lit", pct >= at);
-          });
-        }
-
         let lastLabel = "";
-        let lastDotIdx = -1;
+        let lastPhase = "";
         const start = performance.now();
 
         function tick(now) {
-          const elapsed = now - start;
-          const progress = Math.min(100, getProgress(elapsed));
+          const progress = Math.min(100, getProgress(now - start));
           const display = Math.round(progress);
+          const pct = progress / 100;
 
-          // bar
-          bar.style.width = progress + "%";
+          // fill bar
+          fill.style.width = progress + "%";
+          bloom.style.width = progress + "%";
 
-          // ring
-          const offset = CIRCUMFERENCE * (1 - progress / 100);
-          ringCircle.style.strokeDashoffset = offset;
-          ringPct.textContent = display + "%";
+          // leading orb position
+          head.style.left = progress + "%";
+          head.style.opacity = progress > 1 ? "1" : "0";
 
-          // ticks
-          updateTicks(display);
+          // big percentage
+          pctEl.textContent = display + "%";
 
           // phase
           const ph = getPhase(display);
-
           if (ph.label !== lastLabel) {
             lastLabel = ph.label;
             textEl.style.opacity = "0";
             setTimeout(() => {
               textEl.textContent = ph.label;
               textEl.style.opacity = "1";
-            }, 200);
-            badgeTxt.textContent = ph.badge;
+            }, 220);
           }
-
-          if (ph.dotIdx !== lastDotIdx) {
-            lastDotIdx = ph.dotIdx;
-            dots.forEach((d, i) => {
-              d.classList.remove("active", "done");
-              if (i < ph.dotIdx) d.classList.add("done");
-              if (i === ph.dotIdx) d.classList.add("active");
-            });
+          if (ph.phase !== lastPhase) {
+            lastPhase = ph.phase;
+            phaseLabel.style.opacity = "0";
+            setTimeout(() => {
+              phaseLabel.textContent = ph.phase;
+              phaseLabel.style.opacity = "1";
+            }, 220);
           }
 
           if (progress < 100) {
             requestAnimationFrame(tick);
           } else {
-            // Final state
-            bar.style.width = "100%";
-            ringCircle.style.strokeDashoffset = "0";
-            ringPct.textContent = "100%";
+            fill.style.width = "100%";
+            bloom.style.width = "100%";
+            head.style.left = "100%";
+            pctEl.textContent = "100%";
             textEl.textContent = "Welcome.";
-            badgeTxt.textContent = "Done";
-            dots.forEach((d) => {
-              d.classList.remove("active", "done");
-              d.classList.add("done");
-            });
-            updateTicks(100);
+            phaseLabel.textContent = "";
 
-            // ── SLIDE DOWN preloader, RISE UP portfolio ──
             setTimeout(() => {
               preloader.classList.add("slide-out");
               root.style.opacity = "1";
               root.style.transform = "translateY(0)";
               setTimeout(() => {
                 preloader.style.display = "none";
-              }, 1200);
-            }, 500);
+              }, 1250);
+            }, 520);
           }
         }
 
