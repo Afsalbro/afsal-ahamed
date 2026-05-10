@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@200;300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -49,7 +49,7 @@
       }
 
       /* ══════════════════════════════
-             PRELOADER — full-page GIF + beautiful bar
+             ENHANCED PRELOADER
          ══════════════════════════════ */
       #preloader {
         position: fixed;
@@ -74,7 +74,6 @@
         opacity: 0.8;
       }
 
-      /* deep vignette — heavier at bottom so bar reads clearly */
       #pl-overlay {
         position: absolute;
         inset: 0;
@@ -88,7 +87,6 @@
         pointer-events: none;
       }
 
-      /* ── bottom container ── */
       #pl-ui {
         position: absolute;
         bottom: 0;
@@ -102,7 +100,6 @@
         gap: 0;
       }
 
-      /* ── status text ── */
       #pl-loading-text {
         font-family: "DM Sans", sans-serif;
         font-size: clamp(9px, 1.4vw, 11px);
@@ -115,29 +112,33 @@
         text-align: center;
       }
 
-      /* ══ THE BAR SYSTEM ══ */
-
-      /* outermost glow halo behind the whole bar */
+      /* ══ ENHANCED BAR SYSTEM ══ */
       #pl-bar-glow-outer {
         width: 100%;
         position: relative;
         margin-bottom: 10px;
-        /* soft ambient glow beneath */
-        filter: drop-shadow(0 0 18px rgba(222, 219, 200, 0.12))
-          drop-shadow(0 0 6px rgba(222, 219, 200, 0.08));
+        filter: drop-shadow(0 0 24px rgba(222, 219, 200, 0.18))
+          drop-shadow(0 0 12px rgba(222, 219, 200, 0.12))
+          drop-shadow(0 0 40px rgba(245, 210, 80, 0.15));
       }
 
-      /* track */
       #pl-bar-track {
         width: 100%;
-        height: 3px;
-        background: rgba(222, 219, 200, 0.07);
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          rgba(222, 219, 200, 0.05),
+          rgba(222, 219, 200, 0.12),
+          rgba(222, 219, 200, 0.05)
+        );
         border-radius: 999px;
         position: relative;
         overflow: visible;
+        box-shadow:
+          0 0 20px rgba(0, 0, 0, 0.5) inset,
+          0 1px 0 rgba(255, 255, 255, 0.05);
       }
 
-      /* segmented tick marks baked into the track */
       #pl-bar-track::before {
         content: "";
         position: absolute;
@@ -146,15 +147,14 @@
         background: repeating-linear-gradient(
           90deg,
           transparent,
-          transparent calc(25% - 0.5px),
-          rgba(222, 219, 200, 0.12) calc(25% - 0.5px),
-          rgba(222, 219, 200, 0.12) calc(25% + 0.5px),
-          transparent calc(25% + 0.5px)
+          transparent calc(20% - 0.5px),
+          rgba(222, 219, 200, 0.15) calc(20% - 0.5px),
+          rgba(222, 219, 200, 0.15) calc(20% + 0.5px),
+          transparent calc(20% + 0.5px)
         );
         pointer-events: none;
       }
 
-      /* fill layer */
       #pl-bar-fill {
         position: absolute;
         top: 0;
@@ -163,80 +163,117 @@
         width: 0%;
         border-radius: 999px;
         overflow: hidden;
-        /* base fill */
         background: linear-gradient(
           90deg,
-          rgba(180, 178, 158, 0.6) 0%,
-          rgba(222, 219, 200, 0.88) 60%,
-          rgba(240, 238, 218, 1) 100%
+          rgba(180, 178, 158, 0.7) 0%,
+          rgba(222, 219, 200, 0.92) 45%,
+          rgba(245, 210, 80, 1) 75%,
+          rgba(255, 235, 150, 1) 100%
         );
+        box-shadow:
+          0 0 30px rgba(245, 210, 80, 0.6),
+          0 0 60px rgba(245, 210, 80, 0.3),
+          0 2px 8px rgba(0, 0, 0, 0.3) inset;
+        animation: barPulse 2s ease-in-out infinite;
       }
 
-      /* travelling shimmer inside the fill */
+      @keyframes barPulse {
+        0%,
+        100% {
+          filter: brightness(1) saturate(1);
+        }
+        50% {
+          filter: brightness(1.15) saturate(1.2);
+        }
+      }
+
       #pl-bar-fill::after {
         content: "";
         position: absolute;
         top: 0;
         bottom: 0;
         left: -100%;
-        width: 60%;
+        width: 80%;
         background: linear-gradient(
           90deg,
           transparent 0%,
-          rgba(255, 255, 255, 0) 25%,
-          rgba(255, 255, 255, 0.55) 50%,
-          rgba(255, 255, 255, 0) 75%,
+          rgba(255, 255, 255, 0) 20%,
+          rgba(255, 255, 255, 0.7) 50%,
+          rgba(255, 255, 255, 0) 80%,
           transparent 100%
         );
-        animation: fillShimmer 1.8s ease-in-out infinite;
+        animation: fillShimmer 1.5s ease-in-out infinite;
       }
       @keyframes fillShimmer {
         0% {
-          left: -60%;
+          left: -80%;
         }
         100% {
-          left: 110%;
+          left: 120%;
         }
       }
 
-      /* bright leading-edge orb */
       #pl-bar-head {
         position: absolute;
         top: 50%;
         left: 0%;
         transform: translate(-50%, -50%);
-        width: 10px;
-        height: 10px;
+        width: 14px;
+        height: 14px;
         border-radius: 50%;
-        background: #fff;
+        background: radial-gradient(
+          circle,
+          #fff 0%,
+          #f5d060 40%,
+          rgba(245, 210, 80, 0.4) 100%
+        );
         box-shadow:
-          0 0 6px 2px rgba(255, 255, 255, 0.9),
-          0 0 18px 5px rgba(222, 219, 200, 0.55),
-          0 0 38px 8px rgba(222, 219, 200, 0.22);
-        opacity: 0; /* shown via JS once > 1% */
+          0 0 8px 3px rgba(255, 255, 255, 0.9),
+          0 0 24px 6px rgba(245, 210, 80, 0.7),
+          0 0 48px 10px rgba(222, 219, 200, 0.35),
+          0 0 80px 12px rgba(245, 210, 80, 0.2);
+        opacity: 0;
         transition: opacity 0.4s ease;
         pointer-events: none;
+        animation: headGlow 1.5s ease-in-out infinite;
       }
 
-      /* glow line that bleeds below the track */
+      @keyframes headGlow {
+        0%,
+        100% {
+          box-shadow:
+            0 0 8px 3px rgba(255, 255, 255, 0.9),
+            0 0 24px 6px rgba(245, 210, 80, 0.7),
+            0 0 48px 10px rgba(222, 219, 200, 0.35),
+            0 0 80px 12px rgba(245, 210, 80, 0.2);
+        }
+        50% {
+          box-shadow:
+            0 0 12px 4px rgba(255, 255, 255, 1),
+            0 0 32px 8px rgba(245, 210, 80, 0.9),
+            0 0 60px 14px rgba(222, 219, 200, 0.5),
+            0 0 100px 16px rgba(245, 210, 80, 0.3);
+        }
+      }
+
       #pl-bar-bloom {
         position: absolute;
-        bottom: -6px;
+        bottom: -8px;
         left: 0;
         width: 0%;
-        height: 14px;
+        height: 20px;
         border-radius: 999px;
         background: linear-gradient(
           90deg,
           transparent,
-          rgba(222, 219, 200, 0.12) 40%,
-          rgba(222, 219, 200, 0.28) 100%
+          rgba(245, 210, 80, 0.15) 30%,
+          rgba(245, 210, 80, 0.35) 60%,
+          rgba(222, 219, 200, 0.4) 100%
         );
-        filter: blur(6px);
+        filter: blur(10px);
         pointer-events: none;
       }
 
-      /* ── percentage row (below bar) ── */
       #pl-bar-meta {
         width: 100%;
         display: flex;
@@ -253,6 +290,9 @@
         line-height: 1;
         font-style: italic;
         transition: opacity 0.2s ease;
+        text-shadow:
+          0 0 20px rgba(245, 210, 80, 0.3),
+          0 0 40px rgba(245, 210, 80, 0.1);
       }
       #pl-phase-label {
         font-family: "DM Sans", sans-serif;
@@ -265,10 +305,10 @@
         transition: opacity 0.4s ease;
       }
 
-      /* ══ TECH CARDS ══ */
+      /* ══ NEW TECH CARDS - Header/Body Design ══ */
       .tech-grid {
         display: grid;
-        gap: 10px;
+        gap: 12px;
         grid-template-columns: 1fr;
       }
       @media (min-width: 640px) {
@@ -281,106 +321,160 @@
           grid-template-columns: repeat(3, 1fr);
         }
       }
-      .tc {
-        border-radius: 18px;
-        padding: 28px 28px 24px;
+
+      .tc-new {
+        border-radius: 20px;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
-        gap: 20px;
-        min-height: 300px;
+        min-height: 320px;
         position: relative;
-        overflow: hidden;
-        transition: transform 0.3s ease;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
       }
-      .tc:hover {
-        transform: translateY(-2px);
+      .tc-new:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
       }
-      .tc-dark {
-        background: #101010;
-        border: 1px solid rgba(222, 219, 200, 0.07);
+
+      /* Card Headers */
+      .tc-header {
+        padding: 24px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid;
+        min-height: 100px;
       }
-      .tc-orange {
-        background: #bf4e38;
-        border: none;
+
+      .tc-header-dark {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+        border-bottom-color: rgba(222, 219, 200, 0.12);
       }
-      .tc-cream {
-        background: #dedbc8;
-        border: none;
+      .tc-header-orange {
+        background: linear-gradient(135deg, #d45a42 0%, #bf4e38 100%);
+        border-bottom-color: rgba(255, 255, 255, 0.15);
       }
-      .tc-charcoal {
-        background: #181818;
-        border: 1px solid rgba(222, 219, 200, 0.09);
+      .tc-header-cream {
+        background: linear-gradient(135deg, #f0eedd 0%, #dedbc8 100%);
+        border-bottom-color: rgba(17, 17, 17, 0.12);
       }
-      .tc-num {
-        position: absolute;
-        top: 18px;
-        right: 22px;
+      .tc-header-charcoal {
+        background: linear-gradient(135deg, #242424 0%, #181818 100%);
+        border-bottom-color: rgba(222, 219, 200, 0.15);
+      }
+
+      .tc-header-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .tc-num-new {
         font-family: "DM Sans", sans-serif;
-        font-size: 11px;
-        font-weight: 300;
+        font-size: 13px;
+        font-weight: 400;
         letter-spacing: 0.15em;
-        opacity: 0.55;
       }
-      .tc-dark .tc-num,
-      .tc-charcoal .tc-num {
-        color: #dedbc8;
+      .tc-header-dark .tc-num-new,
+      .tc-header-charcoal .tc-num-new {
+        color: rgba(222, 219, 200, 0.5);
       }
-      .tc-orange .tc-num {
-        color: #fff;
+      .tc-header-orange .tc-num-new {
+        color: rgba(255, 255, 255, 0.7);
       }
-      .tc-cream .tc-num {
-        color: #111;
+      .tc-header-cream .tc-num-new {
+        color: rgba(17, 17, 17, 0.5);
       }
-      .tc-label {
+
+      .tc-label-new {
         font-family: "Cormorant Garamond", serif;
-        font-size: 26px;
+        font-size: 28px;
         font-weight: 600;
         letter-spacing: 0.01em;
         line-height: 1.1;
       }
-      .tc-dark .tc-label,
-      .tc-charcoal .tc-label {
+      .tc-header-dark .tc-label-new,
+      .tc-header-charcoal .tc-label-new {
         color: #dedbc8;
       }
-      .tc-orange .tc-label {
+      .tc-header-orange .tc-label-new {
         color: #fff;
       }
-      .tc-cream .tc-label {
+      .tc-header-cream .tc-label-new {
         color: #111;
       }
-      .tc-desc {
+
+      /* Card Bodies */
+      .tc-body {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex: 1;
+      }
+
+      .tc-body-dark {
+        background: #0a0a0a;
+      }
+      .tc-body-orange {
+        background: #a84331;
+      }
+      .tc-body-cream {
+        background: #d6d3c0;
+      }
+      .tc-body-charcoal {
+        background: #101010;
+      }
+
+      .tc-desc-new {
         font-family: "DM Sans", sans-serif;
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 300;
-        line-height: 1.85;
+        line-height: 1.9;
         letter-spacing: 0.025em;
+        flex: 1;
       }
-      .tc-dark .tc-desc,
-      .tc-charcoal .tc-desc {
-        color: rgba(222, 219, 200, 0.55);
+      .tc-body-dark .tc-desc-new,
+      .tc-body-charcoal .tc-desc-new {
+        color: rgba(222, 219, 200, 0.6);
       }
-      .tc-orange .tc-desc {
-        color: rgba(255, 255, 255, 0.82);
+      .tc-body-orange .tc-desc-new {
+        color: rgba(255, 255, 255, 0.85);
       }
-      .tc-cream .tc-desc {
-        color: rgba(17, 17, 17, 0.65);
+      .tc-body-cream .tc-desc-new {
+        color: rgba(17, 17, 17, 0.7);
       }
+
+      .tc-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
       .tc-tag {
         display: inline-flex;
         align-items: center;
-        padding: 5px 14px;
+        padding: 6px 16px;
         border-radius: 999px;
         font-family: "DM Sans", sans-serif;
         font-size: 10px;
-        font-weight: 300;
-        letter-spacing: 0.07em;
+        font-weight: 400;
+        letter-spacing: 0.08em;
         width: fit-content;
         cursor: default;
+        transition: transform 0.2s ease;
       }
+      .tc-tag:hover {
+        transform: scale(1.05);
+      }
+
       .tag-outline-light {
         background: transparent;
-        color: rgba(222, 219, 200, 0.65);
-        border: 1px solid rgba(222, 219, 200, 0.28);
+        color: rgba(222, 219, 200, 0.7);
+        border: 1px solid rgba(222, 219, 200, 0.35);
       }
       .tag-filled-light {
         background: #dedbc8;
@@ -389,18 +483,137 @@
       }
       .tag-filled-black {
         background: #111;
-        color: rgba(222, 219, 200, 0.75);
+        color: rgba(222, 219, 200, 0.8);
         border: none;
       }
       .tag-outline-white {
         background: transparent;
-        color: rgba(255, 255, 255, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.45);
+        color: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.5);
       }
       .tag-outline-dark {
         background: transparent;
-        color: rgba(17, 17, 17, 0.65);
-        border: 1px solid rgba(17, 17, 17, 0.32);
+        color: rgba(17, 17, 17, 0.7);
+        border: 1px solid rgba(17, 17, 17, 0.4);
+      }
+
+      /* ══ ENHANCED PROJECT CARDS ══ */
+      .project-card {
+        background: linear-gradient(135deg, #0e0e0e 0%, #0a0a0a 100%);
+        border: 1px solid rgba(222, 219, 200, 0.08);
+        border-radius: 22px;
+        padding: 38px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        height: 100%;
+        transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(222, 219, 200, 0.2),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      .project-card:hover {
+        background: linear-gradient(135deg, #141414 0%, #0f0f0f 100%);
+        border-color: rgba(222, 219, 200, 0.2);
+        transform: translateY(-6px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      }
+      .project-card:hover::before {
+        opacity: 1;
+      }
+
+      .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .project-num {
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        color: rgba(222, 219, 200, 0.4);
+        letter-spacing: 0.2em;
+        font-weight: 400;
+        transition: color 0.3s ease;
+      }
+      .project-card:hover .project-num {
+        color: rgba(222, 219, 200, 0.7);
+      }
+
+      .project-arrow {
+        opacity: 0.3;
+        transition: all 0.3s ease;
+      }
+      .project-card:hover .project-arrow {
+        opacity: 1;
+        transform: translate(3px, -3px);
+      }
+
+      .project-content {
+        flex: 1;
+      }
+
+      .project-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(22px, 2.6vw, 32px);
+        font-weight: 700;
+        color: #dedbc8;
+        line-height: 1.2;
+        margin-bottom: 14px;
+        letter-spacing: -0.02em;
+        transition: color 0.3s ease;
+      }
+      .project-card:hover .project-title {
+        color: #f0eedd;
+      }
+
+      .project-desc {
+        font-family: "DM Sans", sans-serif;
+        font-size: 13px;
+        font-weight: 300;
+        color: rgba(222, 219, 200, 0.5);
+        line-height: 1.9;
+        letter-spacing: 0.02em;
+      }
+
+      .project-footer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(222, 219, 200, 0.08);
+      }
+
+      .project-tag {
+        font-family: "DM Sans", sans-serif;
+        font-size: 9px;
+        color: rgba(222, 219, 200, 0.5);
+        font-weight: 400;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        padding: 5px 13px;
+        border-radius: 999px;
+        border: 1px solid rgba(222, 219, 200, 0.18);
+        transition: all 0.3s ease;
+      }
+      .project-card:hover .project-tag {
+        border-color: rgba(222, 219, 200, 0.3);
+        color: rgba(222, 219, 200, 0.7);
       }
 
       /* ══ EXPERIENCE ══ */
@@ -783,6 +996,29 @@
         flex-shrink: 0;
         transition: transform 0.3s ease;
       }
+
+      /* ══ ENHANCED HERO TAGLINE ══ */
+      .hero-tagline {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(18px, 2.2vw, 28px);
+        line-height: 1.4;
+        color: #dedbc8;
+        font-style: italic;
+        font-weight: 400;
+        text-shadow:
+          0 2px 8px rgba(0, 0, 0, 0.8),
+          0 4px 16px rgba(0, 0, 0, 0.6),
+          0 0 40px rgba(222, 219, 200, 0.15);
+        letter-spacing: 0.01em;
+        background: linear-gradient(
+          180deg,
+          rgba(222, 219, 200, 0.95) 0%,
+          rgba(222, 219, 200, 0.85) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
     </style>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -802,7 +1038,6 @@
       <div id="pl-ui">
         <div id="pl-loading-text">Initialising systems...</div>
 
-        <!-- the bar system -->
         <div id="pl-bar-glow-outer">
           <div id="pl-bar-track">
             <div id="pl-bar-fill"></div>
@@ -811,7 +1046,6 @@
           </div>
         </div>
 
-        <!-- percentage + phase label BELOW the bar -->
         <div id="pl-bar-meta">
           <div id="pl-pct">0%</div>
           <div id="pl-phase-label">Slow</div>
@@ -1026,10 +1260,6 @@
     <script>
       /* ══════════════════════════════
              PRELOADER LOGIC
-             0–50 %  : SLOW   (~5 500 ms, ease-in-out)
-             51–80 % : MEDIUM (~1 100 ms, linear)
-             81–100% : FAST   (~  380 ms, linear)
-             Exit: preloader slides DOWN, portfolio rises UP
          ══════════════════════════════ */
       (function () {
         const fill = document.getElementById("pl-bar-fill");
@@ -1097,18 +1327,14 @@
           const display = Math.round(progress);
           const pct = progress / 100;
 
-          // fill bar
           fill.style.width = progress + "%";
           bloom.style.width = progress + "%";
 
-          // leading orb position
           head.style.left = progress + "%";
           head.style.opacity = progress > 1 ? "1" : "0";
 
-          // big percentage
           pctEl.textContent = display + "%";
 
-          // phase
           const ph = getPhase(display);
           if (ph.label !== lastLabel) {
             lastLabel = ph.label;
@@ -1151,7 +1377,6 @@
         requestAnimationFrame(tick);
       })();
 
-      /* ── nav helpers ── */
       function navTo(id) {
         if (id === "home") {
           window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1586,14 +1811,7 @@
                       duration: 0.8,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    style={{
-                      fontFamily: "'Cormorant Garamond',serif",
-                      fontSize: "clamp(16px,2vw,24px)",
-                      lineHeight: 1.3,
-                      color: "rgba(222,219,200,0.78)",
-                      fontStyle: "italic",
-                      fontWeight: 300,
-                    }}
+                    className="hero-tagline"
                   >
                     Crafting the invisible infrastructure that powers the
                     world's most ambitious digital experiences.
@@ -1857,114 +2075,34 @@
                   Built with intent.
                 </span>
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {projects.map((p, i) => (
                   <FadeUp key={i} delay={i * 0.1}>
-                    <div
-                      style={{
-                        background: "#0e0e0e",
-                        border: "1px solid rgba(222,219,200,0.08)",
-                        borderRadius: "18px",
-                        padding: "34px",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "18px",
-                        height: "100%",
-                        transition: "background 0.3s,border-color 0.3s",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = "#141414";
-                        e.currentTarget.style.borderColor =
-                          "rgba(222,219,200,0.15)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = "#0e0e0e";
-                        e.currentTarget.style.borderColor =
-                          "rgba(222,219,200,0.08)";
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "flex-start",
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontFamily: "'DM Sans',sans-serif",
-                            fontSize: "12px",
-                            color: "rgba(222,219,200,0.55)",
-                            letterSpacing: "0.15em",
-                            fontWeight: 400,
-                          }}
-                        >
-                          {p.num}
-                        </span>
+                    <div className="project-card">
+                      <div className="project-header">
+                        <span className="project-num">{p.num}</span>
                         <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 18 18"
+                          className="project-arrow"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 20 20"
                           fill="none"
-                          style={{ opacity: 0.35 }}
                         >
                           <path
-                            d="M4 14L14 4M14 4H7M14 4v7"
+                            d="M4 16L16 4M16 4H8M16 4v8"
                             stroke="#dedbc8"
                             strokeWidth="1.2"
                             strokeLinecap="round"
                           />
                         </svg>
                       </div>
-                      <div style={{ flex: 1 }}>
-                        <h3
-                          style={{
-                            fontFamily: "'Cormorant Garamond',serif",
-                            fontSize: "clamp(20px,2.4vw,28px)",
-                            fontWeight: 600,
-                            color: "#dedbc8",
-                            lineHeight: 1.2,
-                            marginBottom: "12px",
-                          }}
-                        >
-                          {p.title}
-                        </h3>
-                        <p
-                          style={{
-                            fontFamily: "'DM Sans',sans-serif",
-                            fontSize: "12px",
-                            fontWeight: 300,
-                            color: "rgba(222,219,200,0.45)",
-                            lineHeight: 1.85,
-                          }}
-                        >
-                          {p.desc}
-                        </p>
+                      <div className="project-content">
+                        <h3 className="project-title">{p.title}</h3>
+                        <p className="project-desc">{p.desc}</p>
                       </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexWrap: "wrap",
-                          gap: "7px",
-                          paddingTop: "18px",
-                          borderTop: "1px solid rgba(222,219,200,0.08)",
-                        }}
-                      >
+                      <div className="project-footer">
                         {p.tags.map((t, j) => (
-                          <span
-                            key={j}
-                            style={{
-                              fontFamily: "'DM Sans',sans-serif",
-                              fontSize: "9px",
-                              color: "rgba(222,219,200,0.45)",
-                              fontWeight: 300,
-                              letterSpacing: "0.14em",
-                              textTransform: "uppercase",
-                              padding: "4px 11px",
-                              borderRadius: "999px",
-                              border: "1px solid rgba(222,219,200,0.15)",
-                            }}
-                          >
+                          <span key={j} className="project-tag">
                             {t}
                           </span>
                         ))}
@@ -1981,7 +2119,8 @@
       const TechStack = () => {
         const cards = [
           {
-            v: "tc-dark",
+            headerClass: "tc-header-dark",
+            bodyClass: "tc-body-dark",
             icon: "sphere",
             num: "01",
             iconColor: "rgba(222,219,200,0.6)",
@@ -1990,7 +2129,8 @@
             tags: [{ text: "Core Stack", cls: "tag-outline-light" }],
           },
           {
-            v: "tc-orange",
+            headerClass: "tc-header-orange",
+            bodyClass: "tc-body-orange",
             icon: "cube",
             num: "02",
             iconColor: "rgba(255,255,255,0.75)",
@@ -2002,7 +2142,8 @@
             ],
           },
           {
-            v: "tc-charcoal",
+            headerClass: "tc-header-charcoal",
+            bodyClass: "tc-body-charcoal",
             icon: "star",
             num: "03",
             iconColor: "rgba(222,219,200,0.55)",
@@ -2011,7 +2152,8 @@
             tags: [{ text: "UI/UX Focused", cls: "tag-outline-light" }],
           },
           {
-            v: "tc-cream",
+            headerClass: "tc-header-cream",
+            bodyClass: "tc-body-cream",
             icon: "dots",
             num: "04",
             iconColor: "rgba(17,17,17,0.55)",
@@ -2020,7 +2162,8 @@
             tags: [{ text: "Cross-Platform", cls: "tag-outline-dark" }],
           },
           {
-            v: "tc-dark",
+            headerClass: "tc-header-dark",
+            bodyClass: "tc-body-dark",
             icon: "spiral",
             num: "05",
             iconColor: "rgba(222,219,200,0.6)",
@@ -2029,7 +2172,8 @@
             tags: [{ text: "DevOps", cls: "tag-outline-light" }],
           },
           {
-            v: "tc-dark",
+            headerClass: "tc-header-dark",
+            bodyClass: "tc-body-dark",
             icon: "cross",
             num: "06",
             iconColor: "rgba(222,219,200,0.6)",
@@ -2072,32 +2216,23 @@
               <div className="tech-grid">
                 {cards.map((c, i) => (
                   <FadeUp key={i} delay={i * 0.08}>
-                    <div className={`tc ${c.v} h-full`}>
-                      <div className="tc-num">{c.num}</div>
-                      <GeoIcon type={c.icon} color={c.iconColor} />
-                      <div
-                        style={{
-                          flex: 1,
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "10px",
-                        }}
-                      >
-                        <div className="tc-label">{c.label}</div>
-                        <div className="tc-desc">{c.desc}</div>
+                    <div className="tc-new">
+                      <div className={`tc-header ${c.headerClass}`}>
+                        <div className="tc-header-left">
+                          <span className="tc-num-new">{c.num}</span>
+                          <div className="tc-label-new">{c.label}</div>
+                        </div>
+                        <GeoIcon type={c.icon} color={c.iconColor} />
                       </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexWrap: "wrap",
-                          gap: "7px",
-                        }}
-                      >
-                        {c.tags.map((t, j) => (
-                          <span key={j} className={`tc-tag ${t.cls}`}>
-                            {t.text}
-                          </span>
-                        ))}
+                      <div className={`tc-body ${c.bodyClass}`}>
+                        <div className="tc-desc-new">{c.desc}</div>
+                        <div className="tc-tags">
+                          {c.tags.map((t, j) => (
+                            <span key={j} className={`tc-tag ${t.cls}`}>
+                              {t.text}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </FadeUp>
