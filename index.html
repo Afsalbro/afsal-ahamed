@@ -1582,7 +1582,16 @@
     </style>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.26.9/babel.min.js"></script>
+    <script>
+      Babel.registerPresets({
+        "react-classic": {
+          presets: [
+            [Babel.availablePresets.react, { runtime: "classic" }],
+          ],
+        },
+      });
+    </script>
     <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
   </head>
   <body>
@@ -1989,7 +1998,7 @@
       window.addEventListener("load", () => setActive(getActiveSection()));
     </script>
 
-    <script type="text/babel" data-type="module">
+    <script type="text/babel" data-presets="react-classic">
       const { useRef } = React;
       const { motion, useInView, useScroll, useTransform } = window.Motion;
 
